@@ -1,1 +1,1 @@
-# ojt2project
+# JOMIS (Job Order Management Information System)
