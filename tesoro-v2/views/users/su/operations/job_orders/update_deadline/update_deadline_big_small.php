@@ -2,14 +2,24 @@
 	if(isset($_POST['update_deadline_big_small_save'])){
 		$ub = $_SESSION['user_id'];
 		$deadline = $_POST['deadline'];
+		$notif = "";
 		
 		if(isset($_POST['deadline']) && $_POST['deadline']!=NULL){
 			$big_small_save = "UPDATE jo SET deadline_on='$deadline' WHERE job_no=".$_GET['update_deadline'];
 		}else{
 			$big_small_save = "UPDATE jo SET deadline_on=NULL WHERE job_no=".$_GET['update_deadline'];
 		}
+		
+		$check_query="SELECT artist FROM jo WHERE job_no=".$_GET['update_deadline'];
+		$check_result=mysqli_query($conn,$check_query);
+		$check=mysqli_fetch_array($check_result);
+		
+		$notif = "INSERT INTO jo_notifications (job_no,user_id,message,published_on,status,notify) VALUES (".$_GET['update_deadline'].",".$check['artist'].",'deadline has been updated for',NOW(),'unread','Yes')";
 
-		if(mysqli_query($conn,$big_small_save)){?>
+		if(mysqli_query($conn,$big_small_save)){
+			if($check['artist']!=NULL){
+				mysqli_query($conn,$notif);
+			}?>
 			<script type="text/javascript">
 				swal({
 					title: "Success!",

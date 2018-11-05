@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/form.css">	
+	<link rel="stylesheet" type="text/css" href="css/modified/form.css">	
 </head>
 
 <style type="text/css">
@@ -75,13 +75,12 @@
 </style>
 
 <body>
-	<div class="gap"></div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="login-form mb-3">
 					<center>
-						<a href="index.php"><img src="images/TIMS_logo.png" width="225px" alt=""><a/>
+						<a href="index.php"><img src="images/JOMIS_logo.png" width="225px" alt=""><a/>
 					</center>
 					<form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 						<input type="text" class="form-control" value="<?php echo $username;?>" name="username" placeholder="Username or Email" autofocus>
@@ -94,7 +93,7 @@
 				<center>
 					<a href="#" data-toggle="modal" data-target="#SignUp" class="text-center">Create an account
 					</a>
-				</center>
+				</center><br>
 			</div>
 		</div>
 

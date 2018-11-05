@@ -32,13 +32,14 @@
 						<th>Job Kind</th>
 						<th>Customer</th>
 						<th>Received On</th>
-						<th>Encoded By</th>
+						<th>Agent</th>
 						<th>Encoded On</th>
+						<th>Encoded By</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody><?php
-					$sql_query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname,c.lastname FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id WHERE a.agent=".$_SESSION['user_id']." ORDER BY a.encoded_on DESC";
+					$sql_query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname AS 'afn',c.lastname AS 'aln',d.firstname AS 'efn',d.lastname AS 'eln' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id LEFT JOIN users_list d ON a.encoded_by=d.id WHERE a.agent=".$_SESSION['user_id']." ORDER BY a.encoded_on DESC";
 					$result_set=mysqli_query($conn,$sql_query);
 					if(mysqli_num_rows($result_set)>0){
 						while($jo=mysqli_fetch_assoc($result_set)){?>  
@@ -55,10 +56,11 @@
 								<td>
 									<?php echo date('F d, Y',strtotime($jo['received_on']));?>
 								</td>
-								<td><?php echo $jo['firstname']." ".$jo['lastname'];?></td>
+								<td><?php echo $jo['afn']." ".$jo['aln'];?></td>
 								<td>
 									<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>
 								</td>
+								<td><?php echo $jo['efn']." ".$jo['eln'];?></td>
 								<td>
 									<div style="margin: -10px 0px; ">
 										<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">

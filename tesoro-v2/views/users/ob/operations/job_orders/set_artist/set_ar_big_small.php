@@ -6,13 +6,15 @@
 		if(isset($_POST['artist']) && $_POST['artist']!=NULL){
 			$artist = $_POST['artist'];
 			$big_small_save .= ",artist='$artist'";
+			
+			$addn_query = "INSERT INTO jo_notifications (job_no,user_id,message,published_on,status,notify) VALUES (".$_GET['set_ar'].",".$artist.",'you are assigned to layout',NOW(),'unread','Yes')";
 		}else{
 			$big_small_save .= ",artist=NULL";
 		}
 
 		$big_small_save .= " WHERE job_no=".$_GET['set_ar'];
 
-		if(mysqli_query($conn,$big_small_save)){?>
+		if(mysqli_query($conn,$big_small_save) && mysqli_query($conn,$addn_query)){?>
 			<script type="text/javascript">
 				swal({
 					title: "Success!",
@@ -48,13 +50,13 @@
 			<div class="form-group row">
 				<label for="artist" class="col-12 col-form-label">Set Artist</label>
 				<div class="col-12">
-					<select class="custom-select" name="artist" id="artist">
+					<select class="custom-select" name="artist" id="artist" required>
 						<option value="" selected>None</option><?php
 						$user_query="SELECT * FROM users_list GROUP BY lastname,firstname";
 						$user_result=mysqli_query($conn,$user_query);
 						if(mysqli_num_rows($user_result)>0){
 							while($user=mysqli_fetch_array($user_result)){
-								if($user['type']==4 || $user['type']==7){
+								if($user['type']==4 || $user['type']==5 || $user['type']==7){
 									?><option value='<?php echo $user['id'];?>'><?php echo $user['lastname'].", ".$user['firstname'];?></option><?php
 								}
 							}

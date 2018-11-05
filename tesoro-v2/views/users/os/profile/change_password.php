@@ -1,10 +1,11 @@
 <?php
 	$_SESSION['page']='profile.php?type=change';
 ?>
+<title>Change Password</title>
 <div class="col-lg-10 order-lg-2">
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
-			<a href="profile.php?type=view" class="nav-link">Profile</a>
+			<a href="profile.php?type=view" class="nav-link">My Profile</a>
 		</li>
 		<li class="nav-item">
 			<a href="profile.php?type=edit" class="nav-link">Edit Profile</a>

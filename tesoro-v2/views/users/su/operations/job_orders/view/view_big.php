@@ -1,9 +1,9 @@
 <?php
-	$jo_query="SELECT a.job_no,a.description,a.customer,a.agent,a.artist,a.cover,b.job_kind,c.job_type,d.firstname AS 'agf',d.lastname AS 'agl',e.firstname AS 'arf',e.lastname AS 'arl',f.firstname AS 'cof',f.lastname AS 'col',a.pages,g.payment,a.received_on,a.encoded_on FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN jo_type c ON b.job_type=c.id LEFT JOIN users_list d ON a.agent=d.id LEFT JOIN users_list e ON a.artist=e.id LEFT JOIN users_list f ON a.cover=f.id LEFT JOIN jo_payments g ON a.payment=g.id WHERE a.job_no=".$_GET['view'];
+	$jo_query="SELECT a.job_no,a.description,a.customer,a.agent,a.artist,a.cover,b.job_kind,c.job_type,d.firstname AS 'agf',d.lastname AS 'agl',e.firstname AS 'arf',e.lastname AS 'arl',f.firstname AS 'cof',f.lastname AS 'col',h.firstname AS 'efn',h.lastname AS 'eln',a.pages,g.payment,a.received_on,a.encoded_on FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN jo_type c ON b.job_type=c.id LEFT JOIN users_list d ON a.agent=d.id LEFT JOIN users_list e ON a.artist=e.id LEFT JOIN users_list f ON a.cover=f.id LEFT JOIN jo_payments g ON a.payment=g.id LEFT JOIN users_list h ON a.encoded_by=h.id WHERE a.job_no=".$_GET['view'];
 
 	$jo_result=mysqli_query($conn,$jo_query);
-	$jo=mysqli_fetch_array($jo_result);
-?>
+	$jo=mysqli_fetch_array($jo_result);?>
+
 	<div class="row">
 		<div class="col-xl">
 			<div class="form-group row">
@@ -27,7 +27,7 @@
 	<div class="row">
 		<div class="col-xl">
 			<div class="form-group row">
-				<label for="koj" class="col-12 col-form-label">Kind of Job</label>
+				<label for="koj" class="col-12 col-form-label">Job Kind</label>
 				<div class="col-12">
 					<input class="form-control" type="text" value="<?php echo $jo['job_kind'];?>" id="koj" disabled>
 				</div>
@@ -88,30 +88,30 @@
     	<div class="col-xl">
 			<div class="form-group row">
 				<label for="copies" class="col-12 col-form-label">Total Copies</label>
-					<div class="col-12">
-						<div class="input-group">
-							<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
-							<div class="input-group-append index-z">
-								<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
-								<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
-							</div>
+				<div class="col-12">
+					<div class="input-group">
+						<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
+						<div class="input-group-append index-z">
+							<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
+							<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-xl">
-      <div class="form-group row">
-        <label for="pages" class="col-12 col-form-label">Pages</label>
-        <div class="col-12">
-          <input class="form-control" type="text" value="<?php if($jo['pages']!=NULL){echo $jo['pages'];}else{echo "N/A";}?>" id="pages" disabled>
-        </div>
-      </div>
-    </div>
+			<div class="form-group row">
+				<label for="pages" class="col-12 col-form-label">Pages</label>
+				<div class="col-12">
+					<input class="form-control" type="text" value="<?php if($jo['pages']!=NULL){echo $jo['pages'];}else{echo "N/A";}?>" id="pages" disabled>
+				</div>
+			</div>
+		</div>
 
-    <div class="col-xl">
+		<div class="col-xl">
 			<div class="form-group row">
 				<label for="payment" class="col-12 col-form-label">Payment</label>
 				<div class="col-12">
@@ -139,13 +139,22 @@
 				</div>
 			</div>
 		</div>
-	</div><?php
+	</div>
+
+	<div class="row">
+		<div class="col-xl">
+			<div class="form-group row">
+				<label for="encoded_on" class="col-12 col-form-label">Encoded By</label>
+				<div class="col-12">
+					<input class="form-control" type="text" value="<?php echo $jo['efn']." ".$jo['eln'];?>" id="encoded_on" disabled>
+				</div>
+			</div>
+		</div><?php
 		
-	$status_query="SELECT a.notes,b.status FROM jo_status a INNER JOIN jos_list b ON a.status=b.id WHERE a.job_no=".$jo['job_no']." ORDER BY a.updated_on DESC LIMIT 1";
-	$status_result=mysqli_query($conn,$status_query);
-	if(mysqli_num_rows($status_result)>0){
-		while($status=mysqli_fetch_assoc($status_result)){?>
-			<div class="row">
+		$status_query="SELECT a.notes,b.status FROM jo_status a INNER JOIN jos_list b ON a.status=b.id WHERE a.job_no=".$jo['job_no']." ORDER BY a.updated_on DESC LIMIT 1";
+		$status_result=mysqli_query($conn,$status_query);
+		if(mysqli_num_rows($status_result)>0){
+			while($status=mysqli_fetch_assoc($status_result)){?>
 				<div class="col-xl">
 					<div class="form-group row">
 						<label for="status" class="col-12 col-form-label">Current Status</label>
@@ -159,7 +168,9 @@
 						</div>
 					</div>
 				</div>
+			</div><!-- Closing for Row -->
 
+			<div class="row">
 				<div class="col-xl">
 					<div class="form-group row">
 						<label for="notes" class="col-12 col-form-label">Notes</label>
@@ -169,9 +180,8 @@
 					</div>
 				</div>
 			</div><?php
-		}
-	}else{?>
-		<div class="row">
+			}
+		}else{?>
 			<div class="col-xl">
 				<div class="form-group row">
 					<label for="status" class="col-12 col-form-label">Current Status</label>
@@ -185,7 +195,9 @@
 					</div>
 				</div>
 			</div>
+		</div><!-- Closing for Row -->
 
+		<div class="row">
 			<div class="col-xl">
 				<div class="form-group row">
 					<label for="notes" class="col-12 col-form-label">Notes</label>
@@ -195,4 +207,4 @@
 				</div>
 			</div>
 		</div><?php
-	}?>
+		}?>

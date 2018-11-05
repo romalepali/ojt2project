@@ -1,0 +1,14 @@
+.login-form {
+	position: relative;
+	margin-top: 30px;
+ }
+
+@media (max-width: 480px) {
+    .login-form {
+    	width: 100%;
+    }
+}
+
+.navbar {
+	background: #a90000;
+}

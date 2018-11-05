@@ -3,7 +3,6 @@
 <link rel="stylesheet" type="text/css" href="css/modified/main.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/others/sidebar.css">
-<link rel="stylesheet" type="text/css" href="css/others/notification.css">
 <link rel="stylesheet" type="text/css" href="css/others/account.css">
 <link rel="stylesheet" type="text/css" href="css/sweetalert/sweetalert.css">
 

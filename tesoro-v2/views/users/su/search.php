@@ -55,10 +55,11 @@
 			<div class="row">
 				<div class="col-md-12"><?php
 					if(
-						(isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && 
-						(!isset($_GET['view']) || isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) &&
-						(!isset($_GET['view']) || !isset($_GET['copies']) && isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && (!isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && 
-						(!isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && isset($_GET['add_copy']))
+						(isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_deadline']) && !isset($_GET['add_copy'])) && 
+						(!isset($_GET['view']) || isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_deadline']) && !isset($_GET['add_copy'])) && 
+						(!isset($_GET['view']) || !isset($_GET['copies']) && isset($_GET['status']) && !isset($_GET['update_deadline']) && !isset($_GET['add_copy'])) &&
+						(!isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && isset($_GET['update_deadline']) && !isset($_GET['add_copy'])) &&
+						(!isset($_GET['view']) || !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_deadline']) && isset($_GET['add_copy']))
 					) {?>
 						<div style="margin-top: 50px;">
 							<ul id="tabsJustified" class="nav nav-tabs">
@@ -89,13 +90,13 @@
 							</ul><?php
 							if(isset($_GET['view'])){
 								include ('operations/job_orders/view_job_orders.php');
-							} else if(isset($_GET['update_stat'])){
-								include ('operations/job_orders/update_status.php');
-							} else if(isset($_GET['status'])){
-								include ('operations/job_orders/status_info.php');
-							} else if(isset($_GET['copies'])){
+							}else if(isset($_GET['copies'])){
 								include ('operations/job_orders/copies_info.php');
-							} else if(isset($_GET['add_copy'])){
+							}else if(isset($_GET['status'])){
+								include ('operations/job_orders/status_info.php');
+							}else if(isset($_GET['update_deadline'])){
+								include ('operations/job_orders/update_deadline.php');
+							}else if(isset($_GET['add_copy'])){
 								include ('operations/job_orders/add_copy.php');
 							}?>
 						</div><?php

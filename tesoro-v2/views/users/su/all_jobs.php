@@ -10,15 +10,6 @@
 </head>
 
 <style type="text/css">
-	.index-z{
-		z-index: 0;
-	}
-	.nav-job-orders {
-		text-decoration: none;
-		color: #fff;
-		background: rgba(0,0,0,.4);
-	}
-
 	thead,tbody {
 		font-size: 15px;
 	}
@@ -41,6 +32,8 @@
 							if(isset($_GET['jobs'])){
 								if($_GET['jobs']=='ogjo'){
 									include ('jobs/ogjo.php');
+								}else if($_GET['jobs']=='uajo'){
+									include ('jobs/uajo.php');
 								}else if($_GET['jobs']=='iajo'){
 									include ('jobs/iajo.php');
 								}

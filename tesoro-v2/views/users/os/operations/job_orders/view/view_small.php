@@ -1,5 +1,5 @@
 <?php	
-	$jo_query="SELECT a.job_no,a.description,a.customer,a.agent,a.artist,b.job_kind,c.job_type,d.firstname AS 'agf',d.lastname AS 'agl',e.firstname AS 'arf',e.lastname AS 'arl',a.pages,f.color,g.materials,h.size,i.printing,j.payment,a.received_on,a.encoded_on FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN jo_type c ON b.job_type=c.id LEFT JOIN users_list d ON a.agent=d.id LEFT JOIN users_list e ON a.artist=e.id LEFT JOIN jo_colors f ON a.color=f.id LEFT JOIN jo_materials g ON a.materials=g.id LEFT JOIN jo_size h ON a.size=h.id LEFT JOIN jo_printing i ON a.printing=i.id LEFT JOIN jo_payments j ON a.payment=j.id WHERE a.job_no=".$_GET['view'];
+	$jo_query="SELECT a.job_no,a.description,a.customer,a.agent,a.artist,b.job_kind,c.job_type,d.firstname AS 'agf',d.lastname AS 'agl',e.firstname AS 'arf',e.lastname AS 'arl',a.pages,f.color,g.materials,h.size,i.printing,j.payment,a.received_on,a.encoded_on,k.firstname AS 'efn',k.lastname AS 'eln' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN jo_type c ON b.job_type=c.id LEFT JOIN users_list d ON a.agent=d.id LEFT JOIN users_list e ON a.artist=e.id LEFT JOIN jo_colors f ON a.color=f.id LEFT JOIN jo_materials g ON a.materials=g.id LEFT JOIN jo_size h ON a.size=h.id LEFT JOIN jo_printing i ON a.printing=i.id LEFT JOIN jo_payments j ON a.payment=j.id LEFT JOIN users_list k ON a.encoded_by=k.id WHERE a.job_no=".$_GET['view'];
 
 	$jo_result=mysqli_query($conn,$jo_query);
 	$jo=mysqli_fetch_array($jo_result);
@@ -128,15 +128,15 @@
     	<div class="col-xl">
 			<div class="form-group row">
 				<label for="copies" class="col-12 col-form-label">Total Copies</label>
-					<div class="col-12">
-						<div class="input-group">
-							<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
-								<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
-							</div>
+				<div class="col-12">
+					<div class="input-group">
+						<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
+						<div class="input-group-append index-z">
+							<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
+							<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
 						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -150,7 +150,18 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="col-xl">
+			<div class="form-group row">
+				<label for="payment" class="col-12 col-form-label">Payment</label>
+				<div class="col-12">
+					<input class="form-control" type="text" value="<?php if($jo['payment']!=NULL){echo $jo['payment'];}else{echo "N/A";}?>" id="payment" disabled>
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<div class="row">
 		<div class="col-xl">
 			<div class="form-group row">
 				<label for="date_added" class="col-12 col-form-label">Encoded On</label>
@@ -159,74 +170,69 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="row">
+		
 		<div class="col-xl">
 			<div class="form-group row">
-				<label for="payment" class="col-12 col-form-label">Payment</label>
+				<label for="encoded_on" class="col-12 col-form-label">Encoded By</label>
 				<div class="col-12">
-					<input class="form-control" type="text" value="<?php if($jo['payment']!=NULL){echo $jo['payment'];}else{echo "N/A";}?>" id="payment" disabled>
+					<input class="form-control" type="text" value="<?php echo $jo['efn']." ".$jo['eln'];?>" id="encoded_on" disabled>
 				</div>
 			</div>
-		</div><?php
+		</div>
+	</div>
 
+	<div class="row"><?php
 		$status_query="SELECT a.notes,b.status FROM jo_status a INNER JOIN jos_list b ON a.status=b.id WHERE a.job_no=".$jo['job_no']." ORDER BY a.updated_on DESC LIMIT 1";
 		$status_result=mysqli_query($conn,$status_query);
 		if(mysqli_num_rows($status_result)>0){
 			while($status=mysqli_fetch_assoc($status_result)){?>
+				<div class="col-xl">
+					<div class="form-group row">
+						<label for="status" class="col-12 col-form-label">Current Status</label>
+						<div class="col-12">
+							<div class="input-group">
+								<input class="form-control" type="text" value="<?php echo $status['status'];?>" id="status" disabled>
+								<div class="input-group-append index-z">
+									<button class="btn btn-outline-secondary" onclick="update_stat('<?php echo $_GET['view']; ?>')">update</button>
+									<button class="btn btn-outline-secondary" onclick="status('<?php echo $_GET['view']; ?>')">more info</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-		<div class="col-xl">
-			<div class="form-group row">
-				<label for="status" class="col-12 col-form-label">Current Status</label>
-				<div class="col-12">
-					<div class="input-group">
-						<input class="form-control" type="text" value="<?php echo $status['status'];?>" id="status" disabled>
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" onclick="update_stat('<?php echo $_GET['view']; ?>')">update</button>
-							<button class="btn btn-outline-secondary" onclick="status('<?php echo $_GET['view']; ?>')">more info</button>
+				<div class="col-xl">
+					<div class="form-group row">
+						<label for="notes" class="col-12 col-form-label">Notes</label>
+						<div class="col-12">
+							<textarea class="form-control" rows="10" id="notes" style="resize: none;" disabled><?php if($status['notes']!=NULL){echo $status['notes'];}else{echo "N/A";}?></textarea>
+						</div>
+					</div>
+				</div><?php
+			}
+		}else{?>
+			<div class="col-xl">
+				<div class="form-group row">
+					<label for="status" class="col-12 col-form-label">Current Status</label>
+					<div class="col-12">
+						<div class="input-group">
+							<input class="form-control" type="text" value="<?php echo "N/A";?>" id="status" disabled>
+							<div class="input-group-append index-z">
+								<button class="btn btn-outline-secondary" onclick="update_stat('<?php echo $_GET['view']; ?>')">update</button>
+								<button class="btn btn-outline-secondary" onclick="status('<?php echo $_GET['view']; ?>')">more info</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="row">
-		<div class="col-xl">
-			<div class="form-group row">
-				<label for="notes" class="col-12 col-form-label">Notes</label>
-				<div class="col-12">
-					<textarea class="form-control" rows="10" id="notes" style="resize: none;" disabled><?php if($status['notes']!=NULL){echo $status['notes'];}else{echo "N/A";}?></textarea>
-				</div>
-			</div>
-		</div>
-	</div><?php	}
-	}else{?>
-		<div class="col-xl">
-			<div class="form-group row">
-				<label for="status" class="col-12 col-form-label">Current Status</label>
-				<div class="col-12">
-					<div class="input-group">
-						<input class="form-control" type="text" value="<?php echo "N/A";?>" id="status" disabled>
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" onclick="update_stat('<?php echo $_GET['view']; ?>')">update</button>
-							<button class="btn btn-outline-secondary" onclick="status('<?php echo $_GET['view']; ?>')">more info</button>
-						</div>
+			<div class="col-xl">
+				<div class="form-group row">
+					<label for="notes" class="col-12 col-form-label">Notes</label>
+					<div class="col-12">
+						<textarea class="form-control" rows="10" id="notes" style="resize: none;" disabled><?php echo "N/A";?></textarea>
 					</div>
 				</div>
-			</div>
-		</div>
+			</div><?php
+		}?>
 	</div>
-
-	<div class="row">
-		<div class="col-xl">
-			<div class="form-group row">
-				<label for="notes" class="col-12 col-form-label">Notes</label>
-				<div class="col-12">
-					<textarea class="form-control" rows="10" id="notes" style="resize: none;" disabled><?php echo "N/A";?></textarea>
-				</div>
-			</div>
-		</div>
-	</div><?php
-	}?>

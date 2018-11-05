@@ -75,7 +75,6 @@
 																echo "N/A";
 															}?>
 														</td><?php
-														$countStat++;
 													}
 												}else{?>
 													<td>N/A</td>
@@ -89,6 +88,7 @@
 													</button>
 												</div>
 											</td><?php
+											$countStat++;
 										}
 									}
 								}
@@ -131,7 +131,6 @@
 														echo "N/A";
 													}?>
 												</td><?php
-												$countStat++;
 											}
 										}else{?>
 											<td>N/A</td>
@@ -145,6 +144,7 @@
 											</button>
 										</div>
 									</td><?php
+									$countStat++;
 								}
 							}?>
 							</tr><?php

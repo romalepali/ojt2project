@@ -47,13 +47,9 @@
 			<table class="table table-hover" id="myTable">
 				<thead>
 					<tr>
-						<th>Picture</th>
+						<th>Name</th>
 						<th>User Type</th>
 						<th>Status</th>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Birthdate</th>
-						<th>Gender</th>
 						<th>Date Added</th>
 						<th>Actions</th>
 					</tr>
@@ -64,13 +60,9 @@
 					if(mysqli_num_rows($result_set)>0){
 						while($row=mysqli_fetch_assoc($result_set)){?>
 							<tr>
-								<td><img style="border-radius: 100px" width="40px" src="../uploads/images/<?php if($row['picture']=='default'){echo $row['picture'].'2.png';}else{echo $row['picture'].'.png';}?>"></td>
+								<td><a href="profile.php?profile_id=<?php echo $row['id'];?>"><?php echo $row['lastname'].", ".$row['firstname']." ".$row['middlename'];?></a></td>
 								<td><?php if($row['type']!=0){echo $row['utype'];}else{echo "N/A";}?></td>
 								<td><?php echo $row['status'];?></td>
-								<td><?php echo $row['lastname'].", ".$row['firstname']." ".$row['middlename'];?></td>
-								<td><?php echo $row['email'];?></td>
-								<td><?php echo date('F d, Y',strtotime($row['birthdate']));?></td>
-								<td><?php echo $row['gender'];?></td>
 								<td><?php echo date('F d, Y h:m A',strtotime($row['added_on']));?></td>
 								<td>
 									<div style="margin: -10px 0px; ">

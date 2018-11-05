@@ -7,8 +7,9 @@
 			$remove_query = "DELETE FROM jo WHERE job_no=".$_GET['remove'];
 			$removeC_query = "DELETE FROM jo_copies WHERE job_no=".$_GET['remove'];
 			$removeS_query = "DELETE FROM jo_status WHERE job_no=".$_GET['remove'];
+			$removeN_query = "DELETE FROM jo_notifications WHERE job_no=".$_GET['remove'];
 	 	
-			if(mysqli_query($conn,$removeC_query) && mysqli_query($conn,$removeS_query)){
+			if(mysqli_query($conn,$removeC_query) && mysqli_query($conn,$removeS_query) && mysqli_query($conn,$removeN_query)){
 				if(mysqli_query($conn,$remove_query)){?>
 					<script type="text/javascript">
 						swal({

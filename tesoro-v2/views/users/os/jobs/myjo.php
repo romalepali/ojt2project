@@ -5,7 +5,7 @@
 		background: rgba(0,0,0,.4);
 	}
 </style>
-<title>JOMIS | My Job Orders</title>
+<title>JOMIS | Handled</title>
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="all_jobs" class="tab-pane fade active show">
 		<div class="table-responsive">

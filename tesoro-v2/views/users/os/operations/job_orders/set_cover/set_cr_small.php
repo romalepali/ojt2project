@@ -6,13 +6,15 @@
 		if(isset($_POST['cover']) && $_POST['cover']!=NULL){
 			$cover = $_POST['cover'];
 			$small_save .= ",cover='$cover'";
+			
+			$addn_query = "INSERT INTO jo_notifications (job_no,user_id,message,published_on,status,notify) VALUES (".$_GET['set_cr'].",".$cover.",'you are assigned to cover',NOW(),'unread','Yes')";
 		}else{
 			$small_save .= ",cover=NULL";
 		}
 
 		$small_save .= " WHERE job_no=".$_GET['set_cr'];
 
-		if(mysqli_query($conn,$small_save)){?>
+		if(mysqli_query($conn,$small_save) && mysqli_query($conn,$addn_query)){?>
 			<script type="text/javascript">
 				swal({
 					title: "Success!",
@@ -54,7 +56,7 @@
 						$user_result=mysqli_query($conn,$user_query);
 						if(mysqli_num_rows($user_result)>0){
 							while($user=mysqli_fetch_array($user_result)){
-								if($user['type']==4 || $user['type']==7){
+								if($user['type']==4 || $user['type']==5 || $user['type']==7){
 									?><option value='<?php echo $user['id'];?>'><?php echo $user['lastname'].", ".$user['firstname'];?></option><?php
 								}
 							}

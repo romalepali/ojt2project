@@ -1,4 +1,4 @@
-function update_stat(id)
+function update_deadline(id)
 {
 	swal({
 			title: "Warning",
@@ -13,7 +13,7 @@ function update_stat(id)
 		},
 		function(isConfirm){
 		if (isConfirm) {
-		    window.location.href='search.php?update_stat='+id;
+		    window.location.href='search.php?update_deadline='+id;
 		} else {
 		    swal("Cancelled", "Jobbing is not modified!", "error");
 		}

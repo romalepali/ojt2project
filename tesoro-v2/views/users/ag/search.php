@@ -3,7 +3,7 @@
 
 	if(isset($_SESSION['search'])){
 		$keywords = explode(" .-/:",$_SESSION['search']);
-		$query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname,c.lastname FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id WHERE";
+		$query="SELECT a.job_no,a.description,a.customer,a.pages,a.agent,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname AS 'afn',c.lastname AS 'aln',d.firstname AS 'efn',d.lastname AS 'eln' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id LEFT JOIN users_list d ON a.encoded_by=d.id WHERE";
 		$keyCount = 0;
 		foreach($keywords as $keys){
 			if($keyCount > 0){
@@ -17,7 +17,7 @@
 	if(isset($_POST['search_submit'])){
 		$_SESSION['search'] = $search = mysqli_real_escape_string($conn,$_POST['search']);
 		$keywords = explode(" .-/:",$_SESSION['search']);
-		$query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname,c.lastname FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id WHERE";
+		$query="SELECT a.job_no,a.description,a.customer,a.pages,a.agent,a.received_on,a.deadline_on,a.encoded_on,b.job_kind,c.firstname AS 'afn',c.lastname AS 'aln',d.firstname AS 'efn',d.lastname AS 'eln' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id LEFT JOIN users_list c ON a.agent=c.id LEFT JOIN users_list d ON a.encoded_by=d.id WHERE";
 		$keyCount = 0;
 		foreach($keywords as $keys){
 			if($keyCount > 0){

@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Profile</title>
 	<?php include ('include/head.php')?>
 </head>
 

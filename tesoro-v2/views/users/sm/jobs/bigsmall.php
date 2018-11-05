@@ -99,7 +99,7 @@
 								</td>
 								<td><?php
 									if(round(((strtotime($jo['deadline_on'])/24)/60)/60) == 0){
-										echo "Not set";
+										echo "N/A";
 									}else{
 										echo date('F d, Y',strtotime($jo['deadline_on']));
 									}?>

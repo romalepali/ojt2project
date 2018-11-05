@@ -277,6 +277,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/all_jobs_action.js"></script>
 </body>
 </html>

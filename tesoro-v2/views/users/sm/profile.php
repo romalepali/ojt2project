@@ -15,7 +15,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Profile</title>
 	<?php include ('include/head.php')?>
 </head>
 
@@ -23,9 +22,9 @@
 	<?php include ('include/navbar.php')?>
 	<div class="gap"></div>
 	<div class="container-fluid">
-		<div id="content"><?php
-			if(isset($_GET['type'])){?>
-				<div class="row my-2">
+		<div id="content">
+			<div class="row my-2"><?php
+				if(isset($_GET['type']) && $_GET['type']!=NULL){?>
 					<div class="col-lg-2 order-lg-1 text-center">
 						<img src="../uploads/images/<?php echo $pic;?>" class="mx-auto img-fluid img-circle d-block profile" alt="avatar">
 						<?php include ('operations/account/profile_upload.php');?>
@@ -36,9 +35,13 @@
 						include ('profile/edit_profile.php');
 					}else if($_GET['type']=='change'){
 						include ('profile/change_password.php');
-					}?>
-				</div><?php
-			}?>
+					}
+				}else{
+					if(isset($_GET['profile_id']) && $_GET['profile_id']!=NULL){
+						include ('profile/view_user.php');
+					}
+				}?>
+			</div>
 		</div>
 	</div>
 </body>

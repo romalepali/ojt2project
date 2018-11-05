@@ -12,54 +12,26 @@
 		font-size: 11px;
 	}
 	
-	input {
-		outline: none;
+	.index-z{
+		z-index: 0;
 	}
-			
-	input[type=search] {
+
+	#searchbar input[type=search] {
+		outline: none;
 		-webkit-appearance: textfield;
 		-webkit-box-sizing: content-box;
 		font-family: inherit;
 		font-size: 100%;
-	}
-	
-	input::-webkit-search-decoration,input::-webkit-search-cancel-button {
-		display: none; 
-	}
-
-	input[type=search] {
-		background: url('images/search-icon.png') white no-repeat 9px center;
+		background: url('images/search-icon.png') #eee no-repeat 14px center;
 		border: solid 1px #ccc;
-		padding: 5px 10px 5px 32px;
-		width: 0px;
+		padding: 10px 15px 10px 15px;
 		-webkit-border-radius: 10em;
 		-moz-border-radius: 10em;
 		border-radius: 10em;
 		-webkit-transition: all .5s;
 		-moz-transition: all .5s;
 		transition: all .5s;
-	}
-			
-	input[type=search]:focus {
-		width: 130px;
-		background-color: #fff;
-		border-color: #66CC75;
-		-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
-		-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
-		box-shadow: 0 0 5px rgba(109,207,246,.5);
-	}
-			
-	input:-moz-placeholder {
-		color: #999;
-	}
-			
-	input::-webkit-input-placeholder {
-		color: #999;
-	}
-
-	#searchbar input[type=search] {
 		width: 15px;
-		padding-left: 10px;
 		color: transparent;
 		cursor: pointer;
 	}
@@ -69,8 +41,13 @@
 	}
 			
 	#searchbar input[type=search]:focus {
+		background-color: #fff;
+		border-color: #66CC75;
+		-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		box-shadow: 0 0 5px rgba(109,207,246,.5);
 		width: 200px;
-		padding-left: 32px;
+		padding-left: 40px;
 		color: #000;
 		background-color: #fff;
 		cursor: auto;
@@ -143,34 +120,24 @@
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand">
 					<a href="index.php">
-						<img src="images/TIMS_logo.png" width="100px">
+						<img src="images/JOMIS_logo.png" width="100px">
 					</a>
 				</li>
-				<div id="accordion1">
-					<li>
-						<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						  Dashboard
-						</a>
-					</li>
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion1">
-						<li>
-							<a class="input-list nav-encoded" href="#">My Updates</a>
-						</li>
-						<li>
-							<a class="input-list nav-received" href="#">All Updates</a>
-						</li>
-					</div>
-				</div>
+				<li>
+					<a class="nav-dashboard" href="dashboard.php">
+					  Dashboard
+					</a>
+				</li>
 				<div id="accordion2">
 					<li>
 						<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-						  Manage
+						  Job Orders
 						</a>
 					</li>
 					<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion2">
 						<li>
 							<a class="input-list nav-myjo" href="all_jobs.php?jobs=myjo">
-								My Job Orders
+								Handled
 							</a>
 						</li>
 						<li>
@@ -198,16 +165,16 @@
 					</li>
 					<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion3">
 						<li>
-							<a class="input-list nav-daily" href="#">Daily</a>
+							<a class="input-list nav-daily" href="setReport.php?report=daily">Daily</a>
 						</li>
 						<li>
-							<a class="input-list nav-weekly" href="#">Weekly</a>
+							<a class="input-list nav-weekly" href="setReport.php?report=weekly">Weekly</a>
 						</li>
 						<li>
-							<a class="input-list nav-monthly" href="#">Monthly</a>
+							<a class="input-list nav-monthly" href="setReport.php?report=monthly">Monthly</a>
 						</li>
 						<li>
-							<a class="input-list nav-yearly" href="#">Yearly</a>
+							<a class="input-list nav-yearly" href="setReport.php?report=yearly">Yearly</a>
 						</li>
 					</div>
 				</div>
@@ -229,17 +196,86 @@
                 <img style="margin-top: -17px; margin-left: -17px; position: absolute; width: 35px; border-radius: 100px; height: 35px;" src="../uploads/images/<?php echo $user['picture'].".png";?>">
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-header">Account</div>
-                <button class="dropdown-item" onclick="window.location='profile.php?type=view'">Profile</button>
-                <button class="dropdown-item" onclick="logout()">Logout</button>
+				<button class="dropdown-item" onclick="window.location='profile.php?type=view'">My Profile</button>
+				<button class="dropdown-item" onclick="window.location='howto.php?type=use'">How To Use</button>
+                <button class="dropdown-item" data-toggle="modal" data-target="#about">About JOMIS</button>
+                <button class="dropdown-item" onclick="logout()">Log Out</button>
             </div>
         </div>
 		
-		<div style="float: right;">
-			<form id="searchbar" action="search.php" method="POST">
-				<input type="search" name="search" placeholder="Search" value="<?php if(isset($_SESSION['search'])){echo $_SESSION['search'];}?>">
-				<input name="search_submit" type="hidden">
-			</form>
+		<div style="float: right; color: white;">
+			<button type="button" class="btn btn-danger notify jo_notif" title="Daily Notifications" data-toggle="dropdown">
+				<img style="margin-top: -14px; margin-left: -14px; position: absolute;" src="images/notification.png" width="26px">
+				<div style="position: absolute; background-color: white; width:20px; border-radius: 10px; border: 1px solid #a90000; height: 20px;  color: #a90000; margin-top: -17px; margin-left: 10px;">
+					<div class="count-notif" style="font-size: 12px; margin-top: 0px; margin-left: -1px; letter-spacing: -1pt;">
+						0
+					</div>
+				</div>
+			</button>
+			<div class="dropdown-menu dropdown-menu-right">
+				<div class="list-group list-notif" style="max-height: 320px; overflow: auto;"></div>
+				<a class="dropdown-item" href="all_notification.php" style="text-align: center;">see more</a>
+			</div>
+		</div>
+		
+		<div style="float: right; color: white;">
+			<button type="button" class="btn btn-danger notify jobbings-due" title="My Deadlines" data-toggle="dropdown">
+				<img style="margin-top: -17px; margin-left: -17px; position: absolute;" src="images/due.png" width="35px">
+				<div style="position: absolute; background-color: white; width:20px; border-radius: 10px; border: 1px solid #a90000; height: 20px;  color: #a90000; margin-top: -17px; margin-left: 10px;">
+					<div class="count-due" style="font-size: 12px; margin-top: 0px; margin-left: -1px; letter-spacing: -1pt;">
+						0
+					</div>
+				</div>
+			</button>
+			<div class="dropdown-menu dropdown-menu-right">
+				<div class="list-group list-due" style="max-height: 320px; overflow: auto;"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div style="position: fixed; z-index: 2; bottom: 5px; right: 5px;">
+		<form id="searchbar" action="search.php?search=jo" method="POST">
+			<input type="search" name="search" placeholder="Search" value="<?php if(isset($_SESSION['search'])){echo $_SESSION['search'];}?>">
+			<input name="search_submit" type="hidden">
+		</form>
+	</div>
+	
+	<div class="modal fade" id="about">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content"><?php
+				$si_query="SELECT a.app_name,a.app_version,a.app_status FROM system_info a ORDER BY a.updated_on DESC LIMIT 1";
+				$si_result=mysqli_query($conn,$si_query);
+				if(mysqli_num_rows($si_result)>0){
+					while($si=mysqli_fetch_assoc($si_result)){?>
+						<div class="modal-header">
+							<h4 class="modal-title">About JOMIS</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+						<div class="modal-body">
+							<div class="row">
+								<div class="col">App Name</div>
+								<div class="col"><?php echo $si['app_name'];?></div>
+							</div>
+							<div class="row">
+								<div class="col">App Version</div>
+								<div class="col">
+									<?php echo $si['app_version'];?>
+									<span class="badge badge-success"><?php echo $si['app_status'];?></span>
+								</div>
+							</div>
+						</div><?php
+					}
+				}?>
+
+				<div class="modal-footer">
+					<div class="mr-auto">
+						<button class="btn btn-secondary mt-1" style="color: white" onclick="window.location='about.php?type=bugs'">Report Bugs</button>
+						<button class="btn btn-secondary mt-1" onclick="window.location='about.php?type=suggestions'">Suggestions</button>
+					</div>
+					<button type="button" class="btn btn-danger mt-1" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -280,6 +316,66 @@
 			});
 		}
 	</script>
-	<script src="js/inputs.js"></script>
+	
+	<script>
+		$(document).ready(function(){ 
+			function load_unseen_due(view = ''){
+				$.ajax({
+					url:"jo_deadlines.php",
+					method:"POST",
+					data:{view:view},
+					dataType:"json",
+					success:function(data){
+						$('.list-due').html(data.notification);
+						if(data.unseen_notification > 0 && data.unseen_notification <=9){
+							$('.count-due').html(data.unseen_notification);
+						}else if(data.unseen_notification > 9){
+							$('.count-due').html('9+');
+						}
+					}
+				});
+			}
+		
+			load_unseen_due();
+ 
+			$(document).on('click', '.jo_deadlines', function(){
+				$('.count-due').html('0');
+				load_unseen_due('yes');
+			});
+
+			setInterval(function(){load_unseen_due();;}, 5000);
+		});
+	</script>
+	<script>
+		$(document).ready(function(){ 
+			function load_unseen_notif(view = ''){
+				$.ajax({
+					url:"jo_notif.php",
+					method:"POST",
+					data:{view:view},
+					dataType:"json",
+					success:function(data){
+						$('.list-notif').html(data.notification);
+						if(data.unseen_notification > 0 && data.unseen_notification <=9){
+							$('.count-notif').html(data.unseen_notification);
+						}else if(data.unseen_notification > 9){
+							$('.count-notif').html('9+');
+						}
+					}
+				});
+			}
+		
+			load_unseen_notif();
+ 
+			$(document).on('click', '.jo_notif', function(){
+				$('.count-notif').html('0');
+				load_unseen_notif('yes');
+			});
+
+			setInterval(function(){load_unseen_notif();;}, 5000);
+		});
+	</script>
+	<script src="js/system/jo_deadlines.js"></script>
+	<script src="js/system/notifications.js"></script>
 </body>
 </html>

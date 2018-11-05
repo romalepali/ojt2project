@@ -12,21 +12,28 @@
 		font-size: 11px;
 	}
 	
-	input {
-		outline: none;
+	.index-z{
+		z-index: 0;
 	}
 
 	#searchbar input[type=search] {
-		background: url('images/search-icon.png') #fff no-repeat 9px center;
+		outline: none;
+		-webkit-appearance: textfield;
+		-webkit-box-sizing: content-box;
+		font-family: inherit;
+		font-size: 100%;
+		background: url('images/search-icon.png') #eee no-repeat 14px center;
 		border: solid 1px #ccc;
-		padding: 5px 4px 5px 32px;
-		width: 0px;
+		padding: 10px 15px 10px 15px;
 		-webkit-border-radius: 10em;
 		-moz-border-radius: 10em;
 		border-radius: 10em;
 		-webkit-transition: all .5s;
 		-moz-transition: all .5s;
 		transition: all .5s;
+		width: 15px;
+		color: transparent;
+		cursor: pointer;
 	}
 			
 	#searchbar input[type=search]:hover {
@@ -34,8 +41,13 @@
 	}
 			
 	#searchbar input[type=search]:focus {
+		background-color: #fff;
+		border-color: #66CC75;
+		-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+		box-shadow: 0 0 5px rgba(109,207,246,.5);
 		width: 200px;
-		padding-left: 32px;
+		padding-left: 40px;
 		color: #000;
 		background-color: #fff;
 		cursor: auto;
@@ -108,24 +120,9 @@
 			<ul class="sidebar-nav">
 				<li class="sidebar-brand">
 					<a href="index.php">
-						<img src="images/TIMS_logo.png" width="100px">
+						<img src="images/JOMIS_logo.png" width="100px">
 					</a>
 				</li>
-				<div id="accordion1">
-					<li>
-						<a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						  Dashboard
-						</a>
-					</li>
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion1">
-						<li>
-							<a class="input-list nav-mactivity" href="#">My Activity</a>
-						</li>
-						<li>
-							<a class="input-list nav-uactivity" href="#">Users Activity</a>
-						</li>
-					</div>
-				</div>
 				<div id="accordion2">
 					<li>
 						<a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -142,6 +139,9 @@
 						<li>
 							<a class="input-list nav-users" href="users.php?users=all">System Users</a>
 						</li>
+						<li>
+							<a class="input-list nav-reports" href="reports.php?reports=all">System Reports</a>
+						</li>
 					</div>
 				</div>				
 			</ul>
@@ -149,7 +149,7 @@
 
 		<div style="background-color: #a90000;">
 			<a href="#menu-toggle" class="btn btn-danger" id="menu-toggle">&#9776;</a>
-			<div style="color: white;float: right;padding: 1px 8px;">
+			<div class="today" style="color: white;float: right;padding: 1px 8px;">
 				<div id=txt style="font-size: 21px;font-weight: bold;"></div>
 				<div style="margin-top:-8px;font-size:11px;"><?php  echo date('F d, Y')." (".date('l').")";?></div>
 			</div>
@@ -162,17 +162,56 @@
                 <img style="margin-top: -17px; margin-left: -17px; position: absolute; width: 35px; border-radius: 100px; height: 35px;" src="../uploads/images/<?php echo $user['picture'].".png";?>">
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-header">Account</div>
-                <button class="dropdown-item" onclick="window.location='profile.php?type=view'">Profile</button>
-                <button class="dropdown-item" onclick="logout()">Logout</button>
+				<button class="dropdown-item" onclick="window.location='profile.php?type=view'">My Profile</button>
+				<button class="dropdown-item" onclick="window.location='howto.php?type=use'">How To Use</button>
+                <button class="dropdown-item" data-toggle="modal" data-target="#about">About JOMIS</button>
+                <button class="dropdown-item" onclick="logout()">Log Out</button>
             </div>
         </div>
-		
-		<div style="float: right;">
-			<form id="searchbar" action="search.php?search=jo" method="POST">
-				<input type="search" name="search" placeholder="Search" value="<?php if(isset($_SESSION['search'])){echo $_SESSION['search'];}?>">
-				<input name="search_submit" type="hidden">
-			</form>
+	</div>
+	
+	<div style="position: fixed; z-index: 2; bottom: 5px; right: 5px;">
+		<form id="searchbar" action="search.php?search=jo" method="POST">
+			<input type="search" name="search" placeholder="Search" value="<?php if(isset($_SESSION['search'])){echo $_SESSION['search'];}?>">
+			<input name="search_submit" type="hidden">
+		</form>
+	</div>
+	
+	<div class="modal fade" id="about">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content"><?php
+				$si_query="SELECT a.app_name,a.app_version,a.app_status FROM system_info a ORDER BY a.updated_on DESC LIMIT 1";
+				$si_result=mysqli_query($conn,$si_query);
+				if(mysqli_num_rows($si_result)>0){
+					while($si=mysqli_fetch_assoc($si_result)){?>
+						<div class="modal-header">
+							<h4 class="modal-title">About JOMIS</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+
+						<div class="modal-body">
+							<div class="row">
+								<div class="col">App Name</div>
+								<div class="col"><?php echo $si['app_name'];?></div>
+							</div>
+							<div class="row">
+								<div class="col">App Version</div>
+								<div class="col">
+									<?php echo $si['app_version'];?>
+									<span class="badge badge-success"><?php echo $si['app_status'];?></span>
+								</div>
+							</div>
+						</div><?php
+					}
+				}?>
+
+				<div class="modal-footer">
+					<div class="mr-auto">
+						<button class="btn btn-secondary mt-1" style="color: white" onclick="window.location='about.php?type=update_system'">Update</button>
+					</div>
+					<button type="button" class="btn btn-danger mt-1" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -213,6 +252,6 @@
 			});
 		}
 	</script>
-	<script src="js/inputs.js"></script>
+	<script src="js/system/user_profile.js"></script>
 </body>
 </html>

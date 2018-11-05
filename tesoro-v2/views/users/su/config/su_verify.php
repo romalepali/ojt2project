@@ -23,7 +23,13 @@
     } else if(isset($_SESSION['user_type']) && $_SESSION['user_type']==7 && $_SESSION['user_status']=='Active'){
         header("location: ../ar/");
         exit;
-    } else if(!isset($_SESSION['user_type']) && ($_SESSION['user_type'] > 7 && $_SESSION['user_type']) < 1){
+    } else if(isset($_SESSION['user_type']) && $_SESSION['user_type']==8 && $_SESSION['user_status']=='Active'){
+        header("location: ../en/");
+        exit;
+    } else if(isset($_SESSION['user_type']) && $_SESSION['user_type']==9 && $_SESSION['user_status']=='Active'){
+        header("location: ../bo/");
+        exit;
+    } else if(!isset($_SESSION['user_type']) && ($_SESSION['user_type'] > 9 && $_SESSION['user_type']) < 1){
         header("location: ../../../");
         exit;
     }

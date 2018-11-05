@@ -24,8 +24,9 @@
 						<th>Job Kind</th>
 						<th>Customer</th>
 						<th>Received On</th>
-						<th>Encoded By</th>
+						<th>Agent</th>
 						<th>Encoded On</th>
+						<th>Encoded By</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
@@ -33,35 +34,38 @@
 					if(isset($_SESSION['search'])){
 						$result_set=mysqli_query($conn,$query);
 						if(mysqli_num_rows($result_set)>0){
-							while($jo=mysqli_fetch_assoc($result_set)){?>  
-								<tr> 
-								<td><?php echo $jo['job_no'];?></td>
-								<td><?php
-									if($jo['description']!=NULL){
-										echo $jo['job_kind']." (".$jo['description'].")";
-									}else{
-										echo $jo['job_kind'];
-									}?>
-								</td>
-								<td><?php echo $jo['customer'];?></td>
-								<td>
-									<?php echo date('F d, Y',strtotime($jo['received_on']));?>
-								</td>
-								<td><?php echo $jo['firstname']." ".$jo['lastname'];?></td>
-								<td>
-									<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>
-								</td>
-								<td>
-									<div style="margin: -10px 0px; ">
-										<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">
-											MORE INFO
-										</button> 
-										<button class="btn btn-secondary" onclick="edit('<?php echo $jo['job_no']; ?>')" style="font-size: 12px; margin-top: 2px;">
-											EDIT INFO
-										</button> 
-									</div>
-								</td>
-							</tr><?php
+							while($jo=mysqli_fetch_assoc($result_set)){
+								if($jo['agent']==$_SESSION['user_id']){?>  
+									<tr> 
+										<td><?php echo $jo['job_no'];?></td>
+										<td><?php
+											if($jo['description']!=NULL){
+												echo $jo['job_kind']." (".$jo['description'].")";
+											}else{
+												echo $jo['job_kind'];
+											}?>
+										</td>
+										<td><?php echo $jo['customer'];?></td>
+										<td>
+											<?php echo date('F d, Y',strtotime($jo['received_on']));?>
+										</td>
+										<td><?php echo $jo['afn']." ".$jo['aln'];?></td>
+										<td>
+											<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>
+										</td>
+										<td><?php echo $jo['efn']." ".$jo['eln'];?></td>
+										<td>
+											<div style="margin: -10px 0px; ">
+												<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">
+													MORE INFO
+												</button> 
+												<button class="btn btn-secondary" onclick="edit('<?php echo $jo['job_no']; ?>')" style="font-size: 12px; margin-top: 2px;">
+													EDIT INFO
+												</button> 
+											</div>
+										</td>
+									</tr><?php
+								}
 							}   
 						}else{?>
 							<tr>

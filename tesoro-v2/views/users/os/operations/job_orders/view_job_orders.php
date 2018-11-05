@@ -1,8 +1,11 @@
 <?php
 	if(is_numeric($_GET['view']) && $_GET['view']!=0){
 		$test_query="SELECT a.job_no,a.deadline_on,b.job_type FROM jo a INNER JOIN jo_kinds b ON a.job_kind=b.id WHERE a.job_no=".$_GET['view'];
-
 		$test_result=mysqli_query($conn,$test_query);
+		
+		$un_query = "UPDATE jo_notifications SET status='read' WHERE status='unread' AND job_no=".$_GET['view']." AND user_id=".$_SESSION['user_id'];
+		mysqli_query($conn,$un_query);
+		
 		if(mysqli_num_rows($test_result)>0){
 			$test=mysqli_fetch_array($test_result);
 			$jo_date = strtotime($test['deadline_on']);

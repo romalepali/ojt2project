@@ -8,17 +8,12 @@
 		$des = mysqli_real_escape_string($conn,$_POST['des']);
 		$dr = $_POST['dr'];
 		$agent = $_SESSION['user_id'];
+		$encoded_by = $agent;
 		$customer = mysqli_real_escape_string($conn,$_POST['customer']);
 		$pages = mysqli_real_escape_string($conn,$_POST['pages']);
 
 		$add_jo .= "INSERT INTO jo (job_no,customer,job_kind,agent,description,pages";
 		$add_jo_val .= "VALUES ('$jon','$customer','$koj','$agent','$des','$pages'";
-
-		if(isset($_POST['size']) && $_POST['size']!=NULL){
-			$size = $_POST['size'];
-			$add_jo .= ",size";
-			$add_jo_val .= ",'$size'";
-		}
 
 		if(isset($_POST['size']) && $_POST['size']!=NULL){
 			$size = $_POST['size'];
@@ -32,8 +27,8 @@
 			$add_jo_val .= ",'$payment'";
 		}
 
-		$add_jo .= ",received_on,encoded_on)";
-		$add_jo_val .= ",'$dr',NOW())";
+		$add_jo .= ",received_on,encoded_by,encoded_on)";
+		$add_jo_val .= ",'$dr','$encoded_by',NOW())";
 		$add_jo_com = $add_jo." ".$add_jo_val;
 
 		//Copies Info
@@ -55,10 +50,41 @@
 		$add_copy_val .= ",NOW(),'$agent')";
 		$add_copy_com = $add_copy." ".$add_copy_val;
 
-		//Execute
-		if(mysqli_query($conn,$add_jo_com)){
-			if($copies>0){
-				if(mysqli_query($conn,$add_copy_com)){?>
+		$duple_query="SELECT * FROM jo WHERE (job_no='$jon')";
+		$duple_result=mysqli_query($conn,$duple_query);
+		$duple=mysqli_num_rows($duple_result);
+		
+		if($duple>0){?>
+			<script type="text/javascript">
+				swal({
+					title: "Failed!",
+					text: "Job Order already existed!",
+					type: "error"
+				},function(isConfirm){
+					if(isConfirm){
+						window.location.href='<?php echo $_SESSION['page'];?>';
+					}
+				});
+			</script><?php
+		}else{
+			//Execute
+			if(mysqli_query($conn,$add_jo_com)){
+				if($copies>0){
+					if(mysqli_query($conn,$add_copy_com)){?>
+						<script type="text/javascript">
+							swal({
+								title: "Success!",
+								text: "You added a new jobbing!",
+								type: "success"
+							},
+							function(isConfirm) {
+								if (isConfirm) {
+									window.location.href='<?php echo $_SESSION['page'];?>';
+								}
+							});
+						</script><?php
+					}
+				}else{?>
 					<script type="text/javascript">
 						swal({
 							title: "Success!",
@@ -72,12 +98,13 @@
 						});
 					</script><?php
 				}
-			}else{?>
+			}
+			else{?>
 				<script type="text/javascript">
 					swal({
-						title: "Success!",
-						text: "You added a new jobbing!",
-						type: "success"
+						title: "Failed!",
+						text: "Error adding a jobbing",
+						type: "error"
 					},
 					function(isConfirm) {
 						if (isConfirm) {
@@ -86,20 +113,6 @@
 					});
 				</script><?php
 			}
-		}
-		else{?>
-			<script type="text/javascript">
-				swal({
-					title: "Failed!",
-					text: "Error adding a jobbing",
-					type: "error"
-				},
-				function(isConfirm) {
-					if (isConfirm) {
-						window.location.href='<?php echo $_SESSION['page'];?>';
-					}
-				});
-			</script><?php
 		}
 	}
 ?>
