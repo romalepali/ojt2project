@@ -46,8 +46,8 @@
 		if(mysqli_query($conn,$small_save)){?>
 			<script type="text/javascript">
 				swal({
-					title: "Success!",
-					text: "Your changes are applied",
+					title: "Success",
+					text: "Your changes are applied!",
 					type: "success"
 				},
 				function(isConfirm) {
@@ -59,8 +59,8 @@
 		}else{?>
 			<script type="text/javascript">
 				swal({
-					title: "Failed!",
-					text: "No changes applied",
+					title: "Failed",
+					text: "No changes applied!",
 					type: "error"
 				},
 				function(isConfirm) {

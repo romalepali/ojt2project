@@ -21,7 +21,7 @@
 				if(mysqli_num_rows($result2)>0){
 					while($row2 = mysqli_fetch_array($result2)){
 						if($ddate!=NULL){
-							if($days<0 && ($row2['id']!=9 || $row2['id']!=10)){
+							if($days<0 && ($row2['id']<9)){
 								$output .= '<a class="dropdown-item order lvl-1" href="javascript: void" onclick="view_d('.$row["job_no"].')">
 									<strong>J.O.# '.$row["job_no"].'</strong><br>
 									<small><b><em>'.$row["customer"].'</em></b></small><br>
@@ -34,7 +34,7 @@
 					}
 				}else{
 					if($ddate!=NULL){
-						if($days<0 && ($row2['id']!=9 || $row2['id']!=10)){
+						if($days<0 && ($row2['id']<9)){
 							$output .= '<a class="dropdown-item order lvl-1" href="javascript: void" onclick="view_d('.$row["job_no"].')">
 								<strong>J.O.# '.$row["job_no"].'</strong><br>
 								<small><b><em>'.$row["customer"].'</em></b></small><br>

@@ -84,7 +84,9 @@
 			}
 		});
 	});
-</script>
+</script
+
+<title>Reports | Daily</title>
 
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="daily" class="tab-pane fade active show">
@@ -115,7 +117,7 @@
 						<th>Job Kind<br>
 							<select name="jobKind" id="jobKind">
 		  						<option selected="true" disabled="disabled">Select</option><?php
-								$kindQuery = "SELECT job_kind FROM jo_kinds WHERE job_type !=2 ORDER BY job_kind ASC";
+								$kindQuery = "SELECT job_kind FROM jo_kinds ORDER BY job_kind ASC";
 								$kindResult=mysqli_query($conn,$kindQuery);
 								if(mysqli_num_rows($kindResult)>0){
 									while($kindRow=mysqli_fetch_assoc($kindResult)){
@@ -131,7 +133,7 @@
 						<th>Artist<br>
 							<select name="artist" id="artist">
 		  						<option selected="true" disabled="disabled">Select</option><?php
-								$artistQuery = "SELECT firstname, lastname FROM users_list WHERE type = 7 ORDER BY firstname ASC";
+								$artistQuery = "SELECT firstname, lastname FROM users_list WHERE type = 7 OR type = 4 OR type = 5 ORDER BY firstname ASC";
 								$artistResult=mysqli_query($conn,$artistQuery);
 								if(mysqli_num_rows($artistResult)>0){
 									while($artistRow=mysqli_fetch_assoc($artistResult)){	
@@ -147,7 +149,7 @@
 						<th>Status<br>
 							<select name="status" id="status">
 		  						<option selected="true" disabled="disabled">Select</option><?php
-								$statusQuery = "SELECT status FROM jos_list ORDER BY status ASC";
+								$statusQuery = "SELECT status FROM jos_list";
 								$statusResult=mysqli_query($conn,$statusQuery);
 								if(mysqli_num_rows($statusResult)>0){
 									while($statusRow=mysqli_fetch_assoc($statusResult)){
@@ -337,7 +339,7 @@
 								}
 							}
 
-							if($typeId!=3){?>  
+							if($typeId!=NULL){?>  
 								<tr class="<?php echo $colorCode;?>" id="dataRow"> 
 									<td><?php echo date('F d, Y',strtotime($row['received_on']));?></td>	   
 									<td><?php

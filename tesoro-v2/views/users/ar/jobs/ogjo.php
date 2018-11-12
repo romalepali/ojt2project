@@ -8,7 +8,7 @@
 		background: rgba(0,0,0,.4);
 	}
 </style>
-<title>JOMIS | On-Going</title>
+<title>Job Orders | On-Going</title>
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="all_jobs" class="tab-pane fade active show">
 		<div class="table-responsive">
@@ -57,7 +57,7 @@
 												$status_result=mysqli_query($conn,$status_query);
 												if(mysqli_num_rows($status_result)>0){
 													while($status=mysqli_fetch_assoc($status_result)){?>
-														<td><?php echo $status['status']." (".date('F d, Y h:s A',strtotime($status['updated_on'])).")";?></td>
+														<td><?php echo $status['status']." (".date('F d, Y h:i A',strtotime($status['updated_on'])).")";?></td>
 														<td><?php
 															if($status['notes']!=NULL){
 																echo $status['notes'];
@@ -70,7 +70,7 @@
 													<td>N/A</td>
 													<td>N/A</td><?php
 												}?>
-											<td><?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?></td>
+											<td><?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?></td>
 											<td>
 												<div style="margin: -10px 0px; ">
 													<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">
@@ -104,7 +104,7 @@
 										$status_result=mysqli_query($conn,$status_query);
 										if(mysqli_num_rows($status_result)>0){
 											while($status=mysqli_fetch_assoc($status_result)){?>
-												<td><?php echo $status['status']." (".date('F d, Y h:s A',strtotime($status['updated_on'])).")";?></td>
+												<td><?php echo $status['status']." (".date('F d, Y h:i A',strtotime($status['updated_on'])).")";?></td>
 												<td><?php
 													if($status['notes']!=NULL){
 														echo $status['notes'];
@@ -117,7 +117,7 @@
 											<td>N/A</td>
 											<td>N/A</td><?php
 										}?>
-									<td><?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?></td>
+									<td><?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?></td>
 									<td>
 										<div style="margin: -10px 0px; ">
 											<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">

@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/others/account.css">
 <link rel="stylesheet" type="text/css" href="css/sweetalert/sweetalert.css">
 
-<link rel="icon" type="image/png" href="images/head_logo.png">
+<link rel="icon" type="image/png" href="images/logo.png">
 
 <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="js/sweetalert/sweetalert.min.js"></script>

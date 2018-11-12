@@ -7,7 +7,6 @@
 <html>
 <head>
 	<?php include ('include/head.php');?>
-	<title>JOMIS | Reports</title>
 </head>
 
 <style type="text/css">

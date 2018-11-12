@@ -16,13 +16,13 @@
 				while($row=mysqli_fetch_assoc($result_set)){?>  
 					<tr> 
 						<td><?php echo $row['copies']." ".$row['units'];?></td>
-						<td><?php echo date('F d, Y',strtotime($row['added_on']));?></td>
+						<td><?php echo date('F d, Y h:i A',strtotime($row['added_on']));?></td>
 						<td><?php echo $row['firstname']." ".$row['lastname'];?></td>
 					</tr><?php
 				}   
 			}else{?>
 				<tr>
-					<td colspan="6" style="text-align: center;">No data yet!</td>
+					<td colspan="6" style="text-align: center;">No Data Yet!</td>
 				</tr><?php
 			}?>
 		</tbody>

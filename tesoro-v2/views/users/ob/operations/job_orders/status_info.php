@@ -1,6 +1,6 @@
 <?php
 	if(is_numeric($_GET['status']) && $_GET['status']!=0){
-		$test_query="SELECT a.job_no,a.deadline_on,b.job_type FROM jo a INNER JOIN jo_kinds b ON a.job_kind=b.id WHERE a.job_no=".$_GET['status'];
+		$test_query="SELECT a.job_no,a.artist,a.deadline_on,b.job_type FROM jo a INNER JOIN jo_kinds b ON a.job_kind=b.id WHERE a.job_no=".$_GET['status'];
 
 		$test_result=mysqli_query($conn,$test_query);
 		if(mysqli_num_rows($test_result)>0){

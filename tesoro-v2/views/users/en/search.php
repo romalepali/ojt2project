@@ -12,6 +12,7 @@
 			$query .= " a.job_no LIKE '%$keys%' OR a.customer LIKE '%$keys%' OR a.description LIKE '%$keys%'";
 			++$keyCount;
 		}
+		$query .= " ORDER BY a.encoded_on DESC";
 	}
 
 	if(isset($_POST['search_submit'])){
@@ -26,6 +27,7 @@
 			$query .= " a.job_no LIKE '%$keys%' OR a.customer LIKE '%$keys%' OR a.description LIKE '%$keys%'";
 			++$keyCount;
 		}
+		$query .= " ORDER BY a.encoded_on DESC";
 	}
 	
 	$count_query="SELECT count(*) AS 'ucount' FROM jo";

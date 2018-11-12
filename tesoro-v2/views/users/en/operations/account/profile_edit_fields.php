@@ -13,8 +13,8 @@ if(isset($_POST['e_save']) && $_POST['e_save']=='true'){
 	?>
 	<script type="text/javascript">
 		swal({
-			title: "Success!",
-			text: "Your updates are applied",
+			title: "Success",
+			text: "Your updates are applied!",
 			type: "success"
 		},
 		function(isConfirm) {
@@ -28,8 +28,8 @@ if(isset($_POST['e_save']) && $_POST['e_save']=='true'){
 	?>
 	<script type="text/javascript">
 		swal({
-			title: "Failed!",
-			text: "No updates applied",
+			title: "Failed",
+			text: "No updates applied!",
 			type: "error"
 		},
 		function(isConfirm) {

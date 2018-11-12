@@ -133,7 +133,7 @@
 				</thead>
 		
 				<tbody><?php
-					$sql_query="SELECT a.*,b.job_type AS 'jt',c.firstname AS 'fn',c.lastname AS 'ln' FROM jo_kinds a LEFT JOIN jo_type b ON a.job_type=b.id LEFT JOIN users_list c ON a.updated_by=c.id ORDER BY a.job_kind ASC";
+					$sql_query="SELECT a.*,b.job_type AS 'jt',c.firstname AS 'fn',c.lastname AS 'ln' FROM jo_kinds a LEFT JOIN jo_type b ON a.job_type=b.id LEFT JOIN users_list c ON a.updated_by=c.id ORDER BY a.updated_on DESC";
 					$result_set=mysqli_query($conn,$sql_query);
 					if(mysqli_num_rows($result_set)>0){
 						while($row=mysqli_fetch_assoc($result_set)){?>  
@@ -141,7 +141,7 @@
 								<td><?php echo $row['job_kind'];?></td>
 								<td><?php echo $row['jt'];?></td>
 								<td><?php echo $row['fn']." ".$row['ln'];?></td>
-								<td><?php echo date('F d, Y h:s A',strtotime($row['updated_on']));?></td>
+								<td><?php echo date('F d, Y h:i A',strtotime($row['updated_on']));?></td>
 								<td>
 									<div style="margin: -10px 0px; ">
 										<button class="btn btn-secondary" onclick="edit('<?php echo $row['id']; ?>')" style="font-size: 12px; margin-top: 2px;">
@@ -156,7 +156,7 @@
 						}   
 					}else{?>
 						<tr>
-							<td colspan="5" style="text-align: center;">No job kinds yet!</td>
+							<td colspan="5" style="text-align: center;">No Job Kinds Yet!</td>
 						</tr><?php
 					}?>
 				</tbody>

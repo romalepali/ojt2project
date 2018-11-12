@@ -6,7 +6,7 @@
 		if(mysqli_query($conn,$update_user)){?>
 			<script type="text/javascript">
 				swal({
-					title: "Success!",
+					title: "Success",
 					text: "User updates are applied",
 					type: "success"
 				},function(isConfirm){
@@ -18,8 +18,8 @@
 		}else{?>
 			<script type="text/javascript">
 				swal({
-					title: "Failed!",
-					text: "No updates applied",
+					title: "Failed",
+					text: "No updates applied!",
 					type: "error"
 				},function(isConfirm){
 					if(isConfirm){

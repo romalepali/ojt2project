@@ -42,6 +42,50 @@ function update_stat(id)
 	});
 }
 
+function upload_c(id)
+{
+	swal({
+			title: "Warning",
+			text: "Are you sure to modify this jobbing!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "Yes",
+			cancelButtonText: "No",
+			closeOnConfirm: false,
+  			closeOnCancel: false
+		},
+		function(isConfirm){
+		if (isConfirm) {
+		    window.location.href='search.php?upload_c='+id;
+		} else {
+		    swal("Cancelled", "Jobbing is not modified!", "error");
+		}
+	});
+}
+
+function upload_s(id)
+{
+	swal({
+			title: "Warning",
+			text: "Are you sure to modify this jobbing!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "Yes",
+			cancelButtonText: "No",
+			closeOnConfirm: false,
+  			closeOnCancel: false
+		},
+		function(isConfirm){
+		if (isConfirm) {
+		    window.location.href='search.php?upload_s='+id;
+		} else {
+		    swal("Cancelled", "Jobbing is not modified!", "error");
+		}
+	});
+}
+
 function add_copy(id)
 {
 	swal({

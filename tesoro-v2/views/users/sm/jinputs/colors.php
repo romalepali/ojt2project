@@ -130,14 +130,14 @@
 				</thead>
 				
 				<tbody><?php
-					$sql_query="SELECT a.*,b.firstname AS 'fn',b.lastname AS 'ln' FROM jo_colors a LEFT JOIN users_list b ON a.updated_by=b.id ORDER BY a.color ASC";
+					$sql_query="SELECT a.*,b.firstname AS 'fn',b.lastname AS 'ln' FROM jo_colors a LEFT JOIN users_list b ON a.updated_by=b.id ORDER BY a.updated_on DESC";
 					$result_set=mysqli_query($conn,$sql_query);
 					if(mysqli_num_rows($result_set)>0){
 						while($row=mysqli_fetch_assoc($result_set)){?>  
 							<tr> 
 								<td><?php echo $row['color'];?></td>
 								<td><?php echo $row['fn']." ".$row['ln'];?></td>
-								<td><?php echo date('F d, Y h:s A',strtotime($row['updated_on']));?></td>
+								<td><?php echo date('F d, Y h:i A',strtotime($row['updated_on']));?></td>
 								<td>
 									<div style="margin: -10px 0px; ">
 										<button class="btn btn-secondary" onclick="edit('<?php echo $row['id']; ?>')" style="font-size: 12px; margin-top: 2px;">
@@ -152,7 +152,7 @@
 						}   
 					}else{?>
 						<tr>
-							<td colspan="4" style="text-align: center;">No colors yet!</td>
+							<td colspan="4" style="text-align: center;">No Colors Yet!</td>
 						</tr><?php
 					}?>
 				</tbody>

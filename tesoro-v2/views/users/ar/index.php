@@ -48,6 +48,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <?php header("location: all_jobs.php?jobs=ogjo");?>
+    <?php header("location: dashboard.php");?>
 </body>
 </html>

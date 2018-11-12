@@ -21,7 +21,7 @@
 						$result_set=mysqli_query($conn,$query);
 						if(mysqli_num_rows($result_set)>0){
 							while($jo=mysqli_fetch_assoc($result_set)){
-								if($jo['job_type']!=2){?>  
+								if($jo['job_type']!=2 || $jo['artist']==$_SESSION['user_id']){?>  
 									<tr> 
 										<td><?php echo $jo['job_no'];?></td>
 										<td><?php
@@ -54,7 +54,7 @@
 													}?>
 												</td>
 												<td><?php echo $status['firstname']." ".$status['lastname'];?></td>
-												<td><?php echo date('F d, Y',strtotime($status['updated_on']));?></td><?php
+												<td><?php echo date('F d, Y h:i A',strtotime($status['updated_on']));?></td><?php
 											}
 										}else{?>
 											<td><?php echo "N/A";?></td>

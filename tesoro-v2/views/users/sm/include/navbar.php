@@ -163,7 +163,6 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
 				<button class="dropdown-item" onclick="window.location='profile.php?type=view'">My Profile</button>
-				<button class="dropdown-item" onclick="window.location='howto.php?type=use'">How To Use</button>
                 <button class="dropdown-item" data-toggle="modal" data-target="#about">About JOMIS</button>
                 <button class="dropdown-item" onclick="logout()">Log Out</button>
             </div>
@@ -235,7 +234,7 @@
 	<script type="text/javascript">
 		function logout(){
 			swal({
-			  title: "WARNING",
+			  title: "Warning",
 			  text: "Are you sure to logout your account!",
 			  type: "warning",
 			  showCancelButton: true,

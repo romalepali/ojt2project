@@ -9,8 +9,8 @@
 		?>
 		<script type="text/javascript">
 			swal({
-				title: "Failed!",
-				text: "Current password did not match",
+				title: "Failed",
+				text: "Current password did not match!",
 				type: "error"
 			},
 			function(isConfirm) {
@@ -27,8 +27,8 @@
 			?>
 			<script type="text/javascript">
 				swal({
-					title: "Success!",
-					text: "Your updates are applied",
+					title: "Success",
+					text: "Your updates are applied!",
 					type: "success"
 				},
 				function(isConfirm) {
@@ -42,8 +42,8 @@
 			?>
 			<script type="text/javascript">
 				swal({
-					title: "Failed!",
-					text: "No updates applied",
+					title: "Failed",
+					text: "No updates applied!",
 					type: "error"
 				},
 				function(isConfirm) {
@@ -98,7 +98,7 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 			<input class="form-control" type="password" placeholder="enter current password" name="old_pass" placeholder="Password" id="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required autofocus>
 		</div>
 		<div class="col-lg-3 mt-2">
-			<div id="message" style="display: none;">
+			<div id="message">
 				<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
 				<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
 				<p id="number" class="invalid">A <b>number</b></p>
@@ -112,7 +112,7 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 			<input class="form-control" type="password" placeholder="enter new password" name="new_pass" placeholder="Password" id="psw_n" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
 		</div>
 		<div class="col-lg-3 mt-2">
-			<div id="message_n" style="display: none;">
+			<div id="message_n">
 				<p id="letter_n" class="invalid">A <b>lowercase</b> letter</p>
 				<p id="capital_n" class="invalid">A <b>capital (uppercase)</b> letter</p>
 				<p id="number_n" class="invalid">A <b>number</b></p>
@@ -126,11 +126,7 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 			<input class="form-control" type="password" placeholder="enter confirm password" name="con_pass" placeholder="Password" id="psw_c" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"required>
 		</div>
 		<div class="col-lg-3 mt-2">
-			<div id="message_c" style="display: none;">
-				<p id="letter_c" class="invalid">A <b>lowercase</b> letter</p>
-				<p id="capital_c" class="invalid">A <b>capital (uppercase)</b> letter</p>
-				<p id="number_c" class="invalid">A <b>number</b></p>
-				<p id="length_c" class="invalid">Minimum <b>8 characters</b></p>
+			<div id="message_c">
 				<p id="match_c" class="invalid"><b>Matched</b> with <b>new password</b></p>
 			</div>
 		</div>
@@ -155,10 +151,6 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 
 		myInput.onfocus = function() {
 			document.getElementById("message").style.display = "block";
-		}
-
-		myInput.onblur = function() {
-			document.getElementById("message").style.display = "none";
 		}
 
 		myInput.onkeyup = function() {
@@ -208,10 +200,6 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 			document.getElementById("message_n").style.display = "block";
 		}
 
-		myInput_n.onblur = function() {
-			document.getElementById("message_n").style.display = "none";
-		}
-
 		myInput_n.onkeyup = function() {
 			if(myInput_c.value!=myInput_n.value) {  
 				match_c.classList.remove("valid");
@@ -219,10 +207,22 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 				document.getElementById("submit_d").style.display = "inline";
 				document.getElementById("submit_a").style.display = "none";
 			} else {
-				match_c.classList.remove("invalid");
-				match_c.classList.add("valid");
-				document.getElementById("submit_a").style.display = "inline";
-				document.getElementById("submit_d").style.display = "none";
+				if(myInput_c.value.length > 0){
+					match_c.classList.remove("invalid");
+					match_c.classList.add("valid");
+					if(myInput_c.value.length >= 8){
+						document.getElementById("submit_a").style.display = "inline";
+						document.getElementById("submit_d").style.display = "none";
+					}else{
+						document.getElementById("submit_d").style.display = "inline";
+						document.getElementById("submit_a").style.display = "none";
+					}
+				}else{
+					match_c.classList.remove("valid");
+					match_c.classList.add("invalid");
+					document.getElementById("submit_d").style.display = "inline";
+					document.getElementById("submit_a").style.display = "none";
+				}
 			}
 
 			var lowerCaseLetters_n = /[a-z]/g;
@@ -262,17 +262,9 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 		}
 
 		var myInput_c = document.getElementById("psw_c");
-		var letter_c = document.getElementById("letter_c");
-		var capital_c = document.getElementById("capital_c");
-		var number_c = document.getElementById("number_c");
-		var length_c = document.getElementById("length_c");
 
 		myInput_c.onfocus = function() {
 			document.getElementById("message_c").style.display = "block";
-		}
-
-		myInput_c.onblur = function() {
-			document.getElementById("message_c").style.display = "none";
 		}
 
 		myInput_c.onkeyup = function() {
@@ -282,46 +274,23 @@ if(isset($_POST['change']) && $_POST['change']=='true'){?>
 				document.getElementById("submit_d").style.display = "inline";
 				document.getElementById("submit_a").style.display = "none";
 			} else {
-				match_c.classList.remove("invalid");
-				match_c.classList.add("valid");
-				document.getElementById("submit_a").style.display = "inline";
-				document.getElementById("submit_d").style.display = "none";
+				if(myInput_c.value.length > 0){
+					match_c.classList.remove("invalid");
+					match_c.classList.add("valid");
+					if(myInput_c.value.length >= 8){
+						document.getElementById("submit_a").style.display = "inline";
+						document.getElementById("submit_d").style.display = "none";
+					}else{
+						document.getElementById("submit_d").style.display = "inline";
+						document.getElementById("submit_a").style.display = "none";
+					}
+				}else{
+					match_c.classList.remove("valid");
+					match_c.classList.add("invalid");
+					document.getElementById("submit_d").style.display = "inline";
+					document.getElementById("submit_a").style.display = "none";
+				}
 			}			
-
-			var lowerCaseLetters_c = /[a-z]/g;
-			if(myInput_c.value.match(lowerCaseLetters_c)) {  
-				letter_c.classList.remove("invalid");
-				letter_c.classList.add("valid");
-			} else {
-				letter_c.classList.remove("valid");
-				letter_c.classList.add("invalid");
-			}
-
-			var upperCaseLetters_c = /[A-Z]/g;
-			if(myInput_c.value.match(upperCaseLetters_c)) {  
-				capital_c.classList.remove("invalid");
-				capital_c.classList.add("valid");
-			} else {
-				capital_c.classList.remove("valid");
-				capital_c.classList.add("invalid");
-			}
-
-			var numbers_n = /[0-9]/g;
-			if(myInput_c.value.match(numbers_n)) {  
-				number_c.classList.remove("invalid");
-				number_c.classList.add("valid");
-			} else {
-				number_c.classList.remove("valid");
-				number_c.classList.add("invalid");
-			}
-  
-			if(myInput_c.value.length >= 8) {
-				length_c.classList.remove("invalid");
-				length_c.classList.add("valid");
-			} else {
-				length_c.classList.remove("valid");
-				length_c.classList.add("invalid");
-			}
 		}
 	</script>
 <?php

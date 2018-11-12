@@ -22,12 +22,14 @@
 			<div class="row">
 				<div class="col-md-12"><?php
 					if(
-						(isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && 
-						(!isset($_GET['view']) || isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && 
-						(!isset($_GET['view']) || !isset($_GET['set_cr']) && isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) &&
-						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) &&
-						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy'])) &&
-						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && isset($_GET['update_stat']) && !isset($_GET['add_copy'])) && (!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && isset($_GET['update_stat']) && isset($_GET['add_copy']))
+						(isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) && 
+						(!isset($_GET['view']) || isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) && 
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && isset($_GET['set_ar']) && !isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) &&
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && isset($_GET['copies']) && !isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) &&
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && !isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) &&
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && isset($_GET['update_stat']) && !isset($_GET['add_copy']) && !isset($_GET['upload_s'])) &&
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && isset($_GET['update_stat']) && isset($_GET['add_copy']) && !isset($_GET['upload_s'])) &&
+						(!isset($_GET['view']) || !isset($_GET['set_cr']) && !isset($_GET['set_ar']) && !isset($_GET['copies']) && isset($_GET['status']) && isset($_GET['update_stat']) && !isset($_GET['add_copy']) && isset($_GET['upload_s']))
 					) {?>
 						<div style="margin-top: 45px;"><?php
 							if(isset($_GET['jobs'])){
@@ -54,6 +56,8 @@
 								include ('operations/job_orders/update_status.php');
 							}else if(isset($_GET['add_copy'])){
 								include ('operations/job_orders/add_copy.php');
+							}else if(isset($_GET['upload_s'])){
+								include ('operations/job_orders/upload_s.php');
 							}?>
 						</div><?php
 					}?>
@@ -62,5 +66,11 @@
 		</div>
 	</div>
 	<script src="js/system/jo.js"></script>
+
+	<script type="text/javascript">
+		document.getElementById("file").onchange = function() {
+			document.getElementById("form").submit();
+		};
+	</script>
 </body>
 </html>

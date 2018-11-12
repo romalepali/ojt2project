@@ -21,7 +21,6 @@
 		width: 100%;
 		box-shadow: 0px 1px 5px gray;
 		background-color: white;
-		margin: 5px;
 		border-top: solid 10px #A90000;
 		border-top-right-radius: 5px;
 		border-top-left-radius: 5px;

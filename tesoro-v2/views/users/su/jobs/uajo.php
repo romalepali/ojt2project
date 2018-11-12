@@ -8,7 +8,7 @@
 		background: rgba(0,0,0,.4);
 	}
 </style>
-<title>JOMIS | Unassigned</title>
+<title>Job Orders | Unassigned</title>
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="all_jobs" class="tab-pane fade active show">
 		<div class="table-responsive">
@@ -46,7 +46,7 @@
 											echo "N/A";
 										}?>
 									</td>
-									<td><?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?></td>
+									<td><?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?></td>
 									<td>
 										<div style="margin: -10px 0px; ">
 											<button class="btn btn-secondary" onclick="view('<?php echo $jo['job_no'];?>')" style="font-size: 12px; margin-top: 2px; ">
@@ -69,14 +69,14 @@
 						}
 						if($acount==0){?>
 							<tr>
-								<td colspan="8" style="text-align: center;">
+								<td colspan="6" style="text-align: center;">
 									No On-Going Job Orders Yet!
 								</td>
 							</tr><?php							
 						}
 					}else{?>
 						<tr>
-							<td colspan="8" style="text-align: center;">
+							<td colspan="6" style="text-align: center;">
 								No On-Going Job Orders Yet!
 							</td>
 						</tr><?php

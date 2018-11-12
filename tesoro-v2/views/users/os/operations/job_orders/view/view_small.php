@@ -128,15 +128,15 @@
     	<div class="col-xl">
 			<div class="form-group row">
 				<label for="copies" class="col-12 col-form-label">Total Copies</label>
-				<div class="col-12">
-					<div class="input-group">
-						<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
-						<div class="input-group-append index-z">
-							<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
-							<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
+					<div class="col-12">
+						<div class="input-group">
+							<input class="form-control" type="text" value="<?php if($total_copies>0){echo $total_copies;}else{echo "N/A";}?> <?php if($units!=NULL){echo $units;}?>" id="copies" disabled>
+							<div class="input-group-append index-z">
+								<button class="btn btn-outline-secondary" onclick="add_copy('<?php echo $_GET['view']; ?>')">+</button>
+								<button class="btn btn-outline-secondary" onclick="copies('<?php echo $_GET['view']; ?>')">more info</button>
+							</div>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -166,7 +166,7 @@
 			<div class="form-group row">
 				<label for="date_added" class="col-12 col-form-label">Encoded On</label>
 				<div class="col-12">
-					<input class="form-control" type="text" value="<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>" id="date_added" disabled>
+					<input class="form-control" type="text" value="<?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?>" id="date_added" disabled>
 				</div>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 					</div>
 				</div>
 			</div>
-
+		
 			<div class="col-xl">
 				<div class="form-group row">
 					<label for="notes" class="col-12 col-form-label">Notes</label>

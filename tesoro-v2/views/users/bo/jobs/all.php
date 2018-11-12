@@ -52,7 +52,7 @@
 								</td>
 								<td><?php echo $jo['firstname']." ".$jo['lastname'];?></td>
 								<td>
-									<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>
+									<?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?>
 								</td>
 								<td>
 									<div style="margin: -10px 0px; ">
@@ -66,7 +66,7 @@
 					}else{?>
 						<tr>
 							<td colspan="8" style="text-align: center;">
-								No data yet!
+								No Data Yet!
 							</td>
 						</tr><?php
 					}?>

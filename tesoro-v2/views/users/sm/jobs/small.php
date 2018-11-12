@@ -81,7 +81,7 @@
 					</tr>
 				</thead>
 			<tbody><?php
-				$jo_query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,b.job_kind FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE b.job_type=2";
+				$jo_query="SELECT a.job_no,a.description,a.customer,a.pages,a.received_on,a.deadline_on,b.job_kind FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE b.job_type=2 ORDER BY a.encoded_on DESC";
 				$jo_result=mysqli_query($conn,$jo_query);
 					if(mysqli_num_rows($jo_result)>0){
 						while($jo=mysqli_fetch_assoc($jo_result)){?>  
@@ -116,7 +116,7 @@
 											}?>
 										</td>
 										<td><?php echo $status['firstname']." ".$status['lastname'];?></td>
-										<td><?php echo date('F d, Y',strtotime($status['updated_on']));?></td><?php
+										<td><?php echo date('F d, Y h:i A',strtotime($status['updated_on']));?></td><?php
 									}
 								}else{?>
 									<td><?php
@@ -145,7 +145,7 @@
 					}
 					else{?>
 						<tr>
-							<td colspan="9" style="text-align: center;">No data yet!</td>
+							<td colspan="9" style="text-align: center;">No Data Yet!</td>
 						</tr><?php
 					}?>
 				</tbody>

@@ -14,7 +14,7 @@ if (isset($_POST['add_pt_save'])) {
       ?>
         <script type="text/javascript">
           swal({
-            title: "Failed!",
+            title: "Failed",
             text: "Printing already existed!",
             type: "error"
           },
@@ -32,7 +32,7 @@ if (isset($_POST['add_pt_save'])) {
       ?>
         <script type="text/javascript">
           swal({
-            title: "Success!",
+            title: "Success",
             text: "You added a new printing!",
             type: "success"
           },
@@ -49,7 +49,7 @@ if (isset($_POST['add_pt_save'])) {
         ?>
           <script type="text/javascript">
             swal({
-            title: "Failed!",
+            title: "Failed",
             text: "Error adding a printing!",
             type: "error"
           },

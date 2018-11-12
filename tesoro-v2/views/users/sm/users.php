@@ -38,8 +38,9 @@
 			<div class="row">
 				<div class="col-md-12"><?php
 					if(
-						(isset($_GET['update']) || !isset($_GET['remove'])) &&
-						(!isset($_GET['update']) || isset($_GET['remove']))
+						(isset($_GET['update']) || !isset($_GET['remove']) && !isset($_GET['create'])) &&
+						(!isset($_GET['update']) || isset($_GET['remove']) && !isset($_GET['create'])) &&
+						(!isset($_GET['update']) || !isset($_GET['remove']) && isset($_GET['create']))
 					) {?>
 						<div style="margin-top: 50px;"><?php
 							if(isset($_GET['users'])){
@@ -97,8 +98,43 @@
 							include ('operations/users/update_user.php');
 						} else if(isset($_GET['remove'])){
 							include ('operations/users/remove_user.php');
+						} else if(isset($_GET['create'])){
+							include ('ulist/create.php');
 						}
 					}?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="createA">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create An Account</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="row"><?php
+						$ut_query = "SELECT * FROM users_type";
+						$ut_result=mysqli_query($conn,$ut_query);
+						if(mysqli_num_rows($ut_result)>0){
+							while($ut=mysqli_fetch_assoc($ut_result)){?>
+								<div class="col mb-2">
+									<a class="btn btn-secondary form-control" href="javascript: create('<?php echo $ut['id'];?>')"><?php echo $ut['type'];?></a>
+								</div><?php
+							}
+						}else {?>
+							<div class="col">
+								Not Available
+							</div><?php
+						}?>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>

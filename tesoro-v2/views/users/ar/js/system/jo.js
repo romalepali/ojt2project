@@ -20,6 +20,28 @@ function update_stat(id)
 	});
 }
 
+function upload_s(id)
+{
+	swal({
+			title: "Warning",
+			text: "Are you sure to modify this jobbing!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "Yes",
+			cancelButtonText: "No",
+			closeOnConfirm: false,
+  			closeOnCancel: false
+		},
+		function(isConfirm){
+		if (isConfirm) {
+		    window.location.href='all_jobs.php?upload_s='+id;
+		} else {
+		    swal("Cancelled", "Jobbing is not modified!", "error");
+		}
+	});
+}
+
 function view(id)
 {
 	window.location.href='all_jobs.php?view='+id;

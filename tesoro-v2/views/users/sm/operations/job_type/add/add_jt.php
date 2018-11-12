@@ -10,7 +10,7 @@
 		if($duple>0){?>
 			<script type="text/javascript">
 				swal({
-					title: "Failed!",
+					title: "Failed",
 					text: "Job type already existed!",
 					type: "error"
 				},function(isConfirm) {
@@ -23,7 +23,7 @@
 			if(mysqli_query($conn,$add_query)){?>
 				<script type="text/javascript">
 					swal({
-						title: "Success!",
+						title: "Success",
 						text: "You added a new job type!",
 						type: "success"
 					},function(isConfirm) {
@@ -35,7 +35,7 @@
 			}else{?>
 				<script type="text/javascript">
 					swal({
-						title: "Failed!",
+						title: "Failed",
 						text: "Error adding a job type!",
 						type: "error"
 					},function(isConfirm) {

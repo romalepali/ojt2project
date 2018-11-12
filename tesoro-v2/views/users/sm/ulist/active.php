@@ -43,6 +43,11 @@
 
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="all_jobs" class="tab-pane fade active show">
+		<div>
+			<button class="btn btn-secondary" data-toggle="modal" data-target="#createA" style="font-size: 12px; float: right; margin: 5px 0px 5px 5px;">
+				CREATE AN ACCOUNT
+			</button>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-hover" id="myTable">
 				<thead>
@@ -63,7 +68,7 @@
 								<td><a href="profile.php?profile_id=<?php echo $row['id'];?>"><?php echo $row['lastname'].", ".$row['firstname']." ".$row['middlename'];?></a></td>
 								<td><?php if($row['type']!=0){echo $row['utype'];}else{echo "N/A";}?></td>
 								<td><?php echo $row['status'];?></td>
-								<td><?php echo date('F d, Y h:m A',strtotime($row['added_on']));?></td>
+								<td><?php echo date('F d, Y h:i A',strtotime($row['added_on']));?></td>
 								<td>
 									<div style="margin: -10px 0px; ">
 										<button class="btn btn-secondary" onclick="update('<?php echo $row['id']; ?>')" style="font-size: 12px; margin-top: 2px;">
@@ -78,7 +83,7 @@
 						}   
 					}else{?>
 						<tr>
-							<td colspan="9" style="text-align: center;">No users yet!</td>
+							<td colspan="9" style="text-align: center;">No Users Yet!</td>
 						</tr><?php
 					}?>
 				</tbody>

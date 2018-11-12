@@ -64,12 +64,12 @@ if(isset($_FILES['file'])){
 	}
 ?>
 
-<form id="form" method="POST" enctype="multipart/form-data" action="<?php echo $_SESSION['page'];?>">
+<form id="form" method="POST" enctype="multipart/form-data" action="profile.php?type=edit">
 	<label class="custom-file">
 		<input type="file" id="file" name="file" class="custom-file-input">
 		<span class="custom-file-control form-control">Choose file</span>
 	</label>
 </form><br>
-<form class="mb-4" id="form" method="POST" enctype="multipart/form-data" action="<?php echo $_SESSION['page'];?>">
+<form class="mb-4" id="form" method="POST" enctype="multipart/form-data" action="profile.php?type=edit">
 	<button type="submit" name="reset" class="form-control">Reset</button>
 </form>

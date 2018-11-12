@@ -13,7 +13,7 @@ if (isset($_POST['add_un_save'])) {
       ?>
         <script type="text/javascript">
           swal({
-            title: "Failed!",
+            title: "Failed",
             text: "Unit already existed!",
             type: "error"
           },
@@ -31,7 +31,7 @@ if (isset($_POST['add_un_save'])) {
       ?>
         <script type="text/javascript">
           swal({
-            title: "Success!",
+            title: "Success",
             text: "You added a new unit!",
             type: "success"
           },
@@ -48,7 +48,7 @@ if (isset($_POST['add_un_save'])) {
         ?>
           <script type="text/javascript">
             swal({
-            title: "Failed!",
+            title: "Failed",
             text: "Error adding a unit!",
             type: "error"
           },

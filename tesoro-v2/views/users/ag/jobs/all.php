@@ -58,7 +58,7 @@
 								</td>
 								<td><?php echo $jo['afn']." ".$jo['aln'];?></td>
 								<td>
-									<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>
+									<?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?>
 								</td>
 								<td><?php echo $jo['efn']." ".$jo['eln'];?></td>
 								<td>
@@ -76,7 +76,7 @@
 					}else{?>
 						<tr>
 							<td colspan="8" style="text-align: center;">
-								No data yet!
+								No Data Yet!
 							</td>
 						</tr><?php
 					}?>

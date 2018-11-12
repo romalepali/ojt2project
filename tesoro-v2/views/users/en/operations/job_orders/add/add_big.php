@@ -87,7 +87,7 @@
 		if($duple>0){?>
 			<script type="text/javascript">
 				swal({
-					title: "Failed!",
+					title: "Failed",
 					text: "Job Order already existed!",
 					type: "error"
 				},function(isConfirm){
@@ -109,7 +109,7 @@
 
 				<script type="text/javascript">
 					swal({
-						title: "Success!",
+						title: "Success",
 						text: "You encoded a new jobbing!",
 						type: "success"
 					},function(isConfirm) {
@@ -121,7 +121,7 @@
 			}else{?>
 				<script type="text/javascript">
 					swal({
-						title: "Failed!",
+						title: "Failed",
 						text: "Error adding a jobbing",
 						type: "error"
 					},function(isConfirm) {

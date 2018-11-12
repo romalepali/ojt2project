@@ -85,6 +85,8 @@
 	});
 </script>
 
+<title>Reports | Monthly</title>
+
 <div id="tabsJustifiedContent" class="tab-content">
 	<div id="monthly" class="tab-pane fade active show">
 		<div class="table-responsive" >
@@ -132,7 +134,7 @@
 						<th>Artist<br>
 							<select name="artist" id="artist">
 		  						<option selected="true" disabled="disabled">Select</option><?php
-								$artistQuery = "SELECT firstname, lastname FROM users_list WHERE type = 7 ORDER BY firstname ASC";
+								$artistQuery = "SELECT firstname, lastname FROM users_list WHERE type = 7 OR type = 4 OR type = 5 ORDER BY firstname ASC";
 								$artistResult=mysqli_query($conn,$artistQuery);
 								if(mysqli_num_rows($artistResult)>0){
 									while($artistRow=mysqli_fetch_assoc($artistResult)){	
@@ -148,7 +150,7 @@
 						<th>Status<br>
 							<select name="status" id="status">
 		  						<option selected="true" disabled="disabled">Select</option><?php
-								$statusQuery = "SELECT status FROM jos_list ORDER BY status DESC LIMIT 1";
+								$statusQuery = "SELECT status FROM jos_list";
 								$statusResult=mysqli_query($conn,$statusQuery);
 								if(mysqli_num_rows($statusResult)>0){
 									while($statusRow=mysqli_fetch_assoc($statusResult)){
@@ -173,7 +175,7 @@
 
 					if(isset($_POST['view'])){
 						if(empty($_POST['monStart'])&&empty($_POST['monEnd'])){
-							$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no WHERE MONTH(a.received_on) = '$mon' ORDER BY a.received_on DESC";?>
+							$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no LEFT JOIN jo_kinds d ON a.job_kind=d.id WHERE d.job_type!=2 AND MONTH(a.received_on) = '$mon' ORDER BY a.received_on DESC";?>
 							<h3>Month of <?php echo $curMonth;?></h3><?php
 						}else{
 							$monthStart = $_POST['monStart'];
@@ -182,15 +184,15 @@
 							$m2 = $monthEnd;
 						
 							if(empty($_POST['monEnd'])){
-								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no WHERE MONTH(a.received_on) = '$m1' ORDER BY a.received_on DESC";
+								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no LEFT JOIN jo_kinds d ON a.job_kind=d.id WHERE d.job_type!=2 AND MONTH(a.received_on) = '$m1' ORDER BY a.received_on DESC";
 							}else if(empty($_POST['monStart'])){
-								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no WHERE MONTH(a.received_on) = '$m2'  ORDER BY a.received_on DESC";
+								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no LEFT JOIN jo_kinds d ON a.job_kind=d.id WHERE d.job_type!=2 AND MONTH(a.received_on) = '$m2'  ORDER BY a.received_on DESC";
 							}else{
-								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no WHERE MONTH(a.received_on) >= '$m1' AND MONTH(a.received_on) <= '$m2' ORDER BY a.received_on DESC";
+								$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no LEFT JOIN jo_kinds d ON a.job_kind=d.id WHERE d.job_type!=2 AND MONTH(a.received_on) >= '$m1' AND MONTH(a.received_on) <= '$m2' ORDER BY a.received_on DESC";
 							}
 						}
 					}else{
-						$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no WHERE MONTH(a.received_on) = '$mon' ORDER BY a.received_on DESC";
+						$sql_query="SELECT a.received_on,a.job_kind,a.agent,a.artist,a.job_no as JobNo ,a.customer,a.description,a.pages,a.deadline_on,a.encoded_on,b.firstname,b.lastname,b.type,c.copies FROM jo a LEFT JOIN users_list b ON a.agent=b.id LEFT JOIN jo_copies c ON a.job_no=c.job_no LEFT JOIN jo_kinds d ON a.job_kind=d.id WHERE d.job_type!=2 AND MONTH(a.received_on) = '$mon' ORDER BY a.received_on DESC";
 					}
 					
 					$result_set=mysqli_query($conn,$sql_query);

@@ -74,7 +74,7 @@
 					}else{?>
 						<tr>
 							<td colspan="8" style="text-align: center;">
-								No data yet!
+								No Data Yet!
 							</td>
 						</tr><?php
 					}?>

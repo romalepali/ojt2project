@@ -6,7 +6,7 @@
 	$ifDisplay = 0;
 
 	if(isset($_POST['view'])){
-		$query = "SELECT a.*,b.job_kind AS 'kind' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE MONTH(a.encoded_on) = ('$month') ORDER BY a.received_on DESC";
+		$query = "SELECT a.*,b.job_kind AS 'kind' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE MONTH(a.encoded_on) = ('$month') AND a.artist=".$_SESSION['user_id']." ORDER BY a.received_on DESC";
 		$result = mysqli_query($conn, $query);
 
 		if(mysqli_num_rows($result)>0){

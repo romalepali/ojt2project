@@ -5,7 +5,7 @@
 	$ifDisplay = 0;
 
 	if(isset($_POST['view'])){
-		$query = "SELECT a.*,b.job_kind AS 'kind' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE b.job_type!=2 ORDER BY a.encoded_on DESC";
+		$query = "SELECT a.*,b.job_kind AS 'kind' FROM jo a LEFT JOIN jo_kinds b ON a.job_kind=b.id WHERE (b.job_type!=2 OR a.artist=".$_SESSION['user_id'].") ORDER BY a.encoded_on DESC";
 		$result = mysqli_query($conn, $query);
 
 		if(mysqli_num_rows($result) > 0){
@@ -21,7 +21,7 @@
 				if(mysqli_num_rows($result2)>0){
 					while($row2 = mysqli_fetch_array($result2)){
 						if($ddate!=NULL){
-							if($days<0 && ($row2['id']!=9 || $row2['id']!=10)){
+							if($days<0 && ($row2['id']<9)){
 								$output .= '<a class="dropdown-item order lvl-1" href="javascript: void" onclick="view_d('.$row["job_no"].')">
 									<strong>J.O.# '.$row["job_no"].'</strong><br>
 									<small><b><em>'.$row["customer"].'</em></b></small><br>
@@ -34,7 +34,7 @@
 					}
 				}else{
 					if($ddate!=NULL){
-						if($days<0 && ($row2['id']!=9 || $row2['id']!=10)){
+						if($days<0 && ($row2['id']<9)){
 							$output .= '<a class="dropdown-item order lvl-1" href="javascript: void" onclick="view_d('.$row["job_no"].')">
 								<strong>J.O.# '.$row["job_no"].'</strong><br>
 								<small><b><em>'.$row["customer"].'</em></b></small><br>

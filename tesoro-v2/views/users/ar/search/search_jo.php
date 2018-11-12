@@ -54,7 +54,7 @@
 													}?>
 												</td>
 												<td><?php echo $status['firstname']." ".$status['lastname'];?></td>
-												<td><?php echo date('F d, Y',strtotime($status['updated_on']));?></td><?php
+												<td><?php echo date('F d, Y h:i A',strtotime($status['updated_on']));?></td><?php
 											}
 										}else{?>
 											<td><?php echo "N/A";?></td>

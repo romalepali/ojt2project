@@ -34,12 +34,6 @@
 </head>
 
 <style type="text/css">
-	@media (max-width: 768px) {
-		.gap {
-			height: 0px;
-		}
-	}
-
 	#message {
 		position: relative;
 		margin: 20px auto;
@@ -89,11 +83,8 @@
 						<span class="error">* <?php echo $passwordErr;?></span>
 						<button class="btn btn-lg btn-danger btn-block" style="margin-top: 10px;" type="submit" name="login">Log In</button>
 					</form>
+					<center><a href="create.php" class="text-center">Create an Account </a></center>
 				</div>
-				<center>
-					<a href="#" data-toggle="modal" data-target="#SignUp" class="text-center">Create an account
-					</a>
-				</center><br>
 			</div>
 		</div>
 
@@ -160,13 +151,5 @@
 			}
 		}
 	</script>
-
-	<div class="modal fade" id="SignUp">
-		<div class="modal-dialog modal-lg modal-dialog-centered">
-			<div class="modal-content">
-				<?php include('include/signup_fields.php');?>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

@@ -147,7 +147,7 @@
 			<div class="form-group row">
 				<label for="encoded_on" class="col-12 col-form-label">Encoded On</label>
 				<div class="col-12">
-					<input class="form-control" type="text" value="<?php echo date('F d, Y h:s A',strtotime($jo['encoded_on']));?>" id="encoded_on" disabled>
+					<input class="form-control" type="text" value="<?php echo date('F d, Y h:i A',strtotime($jo['encoded_on']));?>" id="encoded_on" disabled>
 				</div>
 			</div>
 		</div>

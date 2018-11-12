@@ -64,7 +64,7 @@
 					</tr>
 				</thead>
 			<tbody><?php
-				$sr_query="SELECT a.id,a.message,a.sent_on,a.status,b.type,c.firstname,c.lastname FROM system_reports a LEFT JOIN system_reports_type b ON a.report_type=b.id LEFT JOIN users_list c ON a.sent_by=c.id WHERE b.id=2";
+				$sr_query="SELECT a.id,a.message,a.sent_on,a.status,b.type,c.firstname,c.lastname FROM system_reports a LEFT JOIN system_reports_type b ON a.report_type=b.id LEFT JOIN users_list c ON a.sent_by=c.id WHERE b.id=2 ORDER BY a.sent_on DESC";
 				$sr_result=mysqli_query($conn,$sr_query);
 					if(mysqli_num_rows($sr_result)>0){
 						while($sr=mysqli_fetch_assoc($sr_result)){?>  
@@ -72,7 +72,7 @@
 								<td><?php echo $sr['firstname']." ".$sr['lastname'];?></td>
 								<td><?php echo $sr['message'];?></td>
 								<td>
-									<?php echo date('F d, Y',strtotime($sr['sent_on']));?>
+									<?php echo date('F d, Y h:i A',strtotime($sr['sent_on']));?>
 								</td>
 								<td><?php
 									if($sr['status']=='New'){?>
@@ -102,7 +102,7 @@
 					}
 					else{?>
 						<tr>
-							<td colspan="9" style="text-align: center;">No data yet!</td>
+							<td colspan="9" style="text-align: center;">No Data Yet!</td>
 						</tr><?php
 					}?>
 				</tbody>

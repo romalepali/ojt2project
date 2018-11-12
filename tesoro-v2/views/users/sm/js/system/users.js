@@ -41,3 +41,8 @@ function remove(id)
 		}
 	});
 }
+
+function create(id)
+{
+	window.location.href='users.php?create='+id;
+}
